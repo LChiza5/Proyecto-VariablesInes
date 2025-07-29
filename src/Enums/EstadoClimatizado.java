@@ -8,9 +8,11 @@ package Enums;
  *
  * @author ilope
  */
-public enum VelocidadVentilador {
+public enum EstadoClimatizado {
     APAGADO, 
     BAJA, 
     MEDIA, 
-    ALTA
+    ALTA,
+    A_C,
+    CALEFACCION
 }
