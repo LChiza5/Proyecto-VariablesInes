@@ -13,6 +13,5 @@ public enum EstadoClimatizado {
     BAJA, 
     MEDIA, 
     ALTA,
-    A_C,
-    CALEFACCION
+  
 }
