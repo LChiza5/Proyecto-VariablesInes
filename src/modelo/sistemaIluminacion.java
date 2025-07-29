@@ -4,6 +4,8 @@
  */
 package modelo;
 
+import Enums.TipoLuz;
+
 /**
  *
  * @author Luisk
@@ -13,7 +15,7 @@ public class sistemaIluminacion {
     private boolean intermitentes;
     private boolean lucesEmergencia;
     private boolean lucesPuertas;
-    private SistemaEncendido encendido;
+    private sistemaEncendido encendido;
 
     public void cambiarLucesDelanteras(TipoLuz tipo) {
         if (encendido.permiteSubsistemasBasicos()) {
@@ -42,7 +44,7 @@ public class sistemaIluminacion {
     public boolean isLucesPuertas() { 
         return lucesPuertas; }
     
-     public sistemaIluminacion(SistemaEncendido encendido) {
+     public sistemaIluminacion(sistemaEncendido encendido) {
         this.encendido = encendido;
         this.lucesDelanteras = TipoLuz.APAGADA;
         this.intermitentes = false;

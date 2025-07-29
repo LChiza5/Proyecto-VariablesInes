@@ -9,7 +9,7 @@ package Enums;
  * @author ilope
  */
 public enum EstadoEncendido {
-    PAGADO, 
+    APAGADO, 
     EMISION, 
     ENCENDIDO
 }
