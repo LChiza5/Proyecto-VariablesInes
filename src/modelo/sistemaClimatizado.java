@@ -16,7 +16,15 @@ public class sistemaClimatizado {
     private boolean calefaccion;
     private final sistemaEncendido encendido;
 
-    // Métodos de acceso
+    
+    public sistemaClimatizado(sistemaEncendido encendido) {
+        this.encendido = encendido;
+        this.ac = false;
+        this.calefaccion = false;
+        this.velocidad = EstadoClimatizado.APAGADO;
+    }
+
+    
     public EstadoClimatizado getVelocidad() {
         return velocidad;
     }
@@ -29,15 +37,7 @@ public class sistemaClimatizado {
         return calefaccion;
     }
 
-    // Constructor
-    public sistemaClimatizado(sistemaEncendido encendido) {
-        this.encendido = encendido;
-        this.ac = false;
-        this.calefaccion = false;
-        this.velocidad = EstadoClimatizado.APAGADO;
-    }
-
-    // Métodos funcionales
+    
     public void activarModoAC() {
         if (encendido.permiteSubsistemasBasicos()) {
             this.ac = true;
@@ -46,6 +46,7 @@ public class sistemaClimatizado {
         }
     }
 
+    
     public void activarModoCalefaccion() {
         if (encendido.permiteSubsistemasBasicos()) {
             this.calefaccion = true;
@@ -54,16 +55,17 @@ public class sistemaClimatizado {
         }
     }
 
+    
     public void cambiarVelocidad(EstadoClimatizado nuevaVelocidad) {
         if (encendido.permiteSubsistemasBasicos() && (ac || calefaccion)) {
             this.velocidad = nuevaVelocidad;
         }
     }
 
+    
     public void apagar() {
         this.ac = false;
         this.calefaccion = false;
         this.velocidad = EstadoClimatizado.APAGADO;
     }
-    }
-    
+}
