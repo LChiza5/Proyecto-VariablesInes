@@ -13,7 +13,7 @@ import Enums.EstadoCinturon;
 public class sistemaCinturones {
     private EstadoCinturon cinturón;  
 
-    public sistemaCinturones() {
+    public sistemaCinturones(int cantidadCinturones) {
         this.cinturón = EstadoCinturon.NO_ABROCHADO;
     }
 

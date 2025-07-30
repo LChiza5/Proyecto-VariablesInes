@@ -13,6 +13,10 @@ import Enums.EstadoPuerta;
 public class sistemaPuertas {
     private EstadoPuerta[] puertas;
     private sistemaAlarmaBloqueo alarmaBloqueo;
+    
+    public int getCantidadPuertas() {
+    return puertas.length;
+}
 
     public sistemaPuertas(int totalPuertas, sistemaAlarmaBloqueo alarmaBloqueo) {
         this.alarmaBloqueo = alarmaBloqueo;

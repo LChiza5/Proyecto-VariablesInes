@@ -38,7 +38,7 @@ public class sistemaClimatizado {
     }
 
     
-    public void activarModoAC() {
+    public void activarModoAC(boolean par) {
         if (encendido.permiteSubsistemasBasicos()) {
             this.ac = true;
             this.calefaccion = false;
@@ -47,7 +47,7 @@ public class sistemaClimatizado {
     }
 
     
-    public void activarModoCalefaccion() {
+    public void activarModoCalefaccion(boolean par) {
         if (encendido.permiteSubsistemasBasicos()) {
             this.calefaccion = true;
             this.ac = false;

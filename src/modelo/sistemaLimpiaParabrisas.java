@@ -23,9 +23,13 @@ public class sistemaLimpiaParabrisas {
         this.velocidad = VelocidadLimpiaParabrisas.OFF;
     }
 
-    public void cambiarVelocidad(VelocidadLimpiaParabrisas nuevaVelocidad) {
-        if (encendido.permiteSubsistemasBasicos()) {
-            this.velocidad = nuevaVelocidad;
-        }
+    public boolean cambiarVelocidad(VelocidadLimpiaParabrisas nuevaVelocidad) {
+    if (encendido.estaEncendido()) {
+        this.velocidad = nuevaVelocidad;
+        return true;
+    } else {
+        System.out.println("No se puede cambiar la velocidad, el auto está apagado.");
+        return false;
+    }
     }
 }
