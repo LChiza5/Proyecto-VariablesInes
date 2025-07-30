@@ -11,41 +11,45 @@ import Enums.EstadoPuerta;
  * @author LOLO
  */
 public class sistemaPuertas {
-    private EstadoPuerta puertaConductor;
-    private EstadoPuerta puertaPasajero;
-    private EstadoPuerta puertaTraseraIzquierda;
-    private EstadoPuerta puertaTraseraDerecha;
+    private EstadoPuerta[] puertas;
+    private SistemaAlarmaBloqueo alarmaBloqueo;
 
-    public sistemaPuertas() {
-        puertaConductor = EstadoPuerta.CERRADA;
-        puertaPasajero = EstadoPuerta.CERRADA;
-        puertaTraseraIzquierda = EstadoPuerta.CERRADA;
-        puertaTraseraDerecha = EstadoPuerta.CERRADA;
-    }
-
-    public void abrirPuerta(String puerta) {
-        switch(puerta.toLowerCase()) {
-            case "conductor": puertaConductor = EstadoPuerta.ABIERTA; break;
-            case "pasajero": puertaPasajero = EstadoPuerta.ABIERTA; break;
-            case "traseraizquierda": puertaTraseraIzquierda = EstadoPuerta.ABIERTA; break;
-            case "traseraderecha": puertaTraseraDerecha = EstadoPuerta.ABIERTA; break;
+    public sistemaPuertas(int totalPuertas, SistemaAlarmaBloqueo alarmaBloqueo) {
+        this.alarmaBloqueo = alarmaBloqueo;
+        puertas = new EstadoPuerta[totalPuertas];
+        for (int i = 0; i < totalPuertas; i++) {
+            puertas[i] = EstadoPuerta.CERRADA;
         }
     }
 
-    public void cerrarPuerta(String puerta) {
-        switch(puerta.toLowerCase()) {
-            case "conductor": puertaConductor = EstadoPuerta.CERRADA; break;
-            case "pasajero": puertaPasajero = EstadoPuerta.CERRADA; break;
-            case "traseraizquierda": puertaTraseraIzquierda = EstadoPuerta.CERRADA; break;
-            case "traseraderecha": puertaTraseraDerecha = EstadoPuerta.CERRADA; break;
+    public boolean abrirPuerta(int indice) {
+        if (alarmaBloqueo.isPuertasBloqueadas()) {
+            return false; // No se puede abrir puerta bloqueada
         }
+        puertas[indice] = EstadoPuerta.ABIERTA;
+        return true;
     }
 
-    public String obtenerEstadoPuertas() {
-        return "Conductor: " + puertaConductor +
-               ", Pasajero: " + puertaPasajero +
-               ", Trasera Izquierda: " + puertaTraseraIzquierda +
-               ", Trasera Derecha: " + puertaTraseraDerecha;
+    public void cerrarPuerta(int indice) {
+        puertas[indice] = EstadoPuerta.CERRADA;
+    }
+
+    public EstadoPuerta getEstadoPuerta(int indice) {
+        return puertas[indice];
+    }
+
+    public boolean estaTodasCerradas() {
+        for (EstadoPuerta puerta : puertas) {
+            if (puerta != EstadoPuerta.CERRADA) return false;
+        }
+        return true;
+    }
+
+    public boolean algunaPuertaAbierta() {
+        for (EstadoPuerta puerta : puertas) {
+            if (puerta == EstadoPuerta.ABIERTA) return true;
+        }
+        return false;
     }
 }
 

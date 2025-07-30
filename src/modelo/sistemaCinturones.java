@@ -11,41 +11,26 @@ import Enums.EstadoCinturon;
  * @author LOLO
  */
 public class sistemaCinturones {
-    private EstadoCinturon conductor;
-    private EstadoCinturon pasajero;
-    private EstadoCinturon traseroIzquierdo;
-    private EstadoCinturon traseroDerecho;
+    private EstadoCinturon cinturón;  
 
     public sistemaCinturones() {
-        conductor = EstadoCinturon.NO_ABROCHADO;
-        pasajero = EstadoCinturon.NO_ABROCHADO;
-        traseroIzquierdo = EstadoCinturon.NO_ABROCHADO;
-        traseroDerecho = EstadoCinturon.NO_ABROCHADO;
+        this.cinturón = EstadoCinturon.NO_ABROCHADO;
     }
 
-    public void abrochar(String posicion) {
-        switch(posicion.toLowerCase()) {
-            case "conductor": conductor = EstadoCinturon.ABROCHADO; break;
-            case "pasajero": pasajero = EstadoCinturon.ABROCHADO; break;
-            case "traseroizquierdo": traseroIzquierdo = EstadoCinturon.ABROCHADO; break;
-            case "traseroderecho": traseroDerecho = EstadoCinturon.ABROCHADO; break;
-        }
+    public void abrocharCinturon() {
+        this.cinturón = EstadoCinturon.ABROCHADO;
     }
 
-    public void desabrochar(String posicion) {
-        switch(posicion.toLowerCase()) {
-            case "conductor": conductor = EstadoCinturon.NO_ABROCHADO; break;
-            case "pasajero": pasajero = EstadoCinturon.NO_ABROCHADO; break;
-            case "traseroizquierdo": traseroIzquierdo = EstadoCinturon.NO_ABROCHADO; break;
-            case "traseroderecho": traseroDerecho = EstadoCinturon.NO_ABROCHADO; break;
-        }
+    public void desabrocharCinturon() {
+        this.cinturón = EstadoCinturon.NO_ABROCHADO;
     }
 
-    public String obtenerEstadoCinturones() {
-        return "Conductor: " + conductor +
-               ", Pasajero: " + pasajero +
-               ", Trasero Izquierdo: " + traseroIzquierdo +
-               ", Trasero Derecho: " + traseroDerecho;
+    public EstadoCinturon getEstadoCinturon() {
+        return cinturón;
+    }
+
+    public boolean estaAbrochado() {
+        return cinturón == EstadoCinturon.ABROCHADO;
     }
 }
 
