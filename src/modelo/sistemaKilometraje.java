@@ -12,22 +12,31 @@ public class sistemaKilometraje {
     private double distancia;
     private double velocidad;
     private int rpm;
+    private sistemaEncendido encendido;
+    private sistemaSensores sensores;
 
-    public double getDistancia() {
-        return distancia;
+    public sistemaKilometraje(sistemaEncendido encendido, sistemaSensores sensores) {
+        this.encendido = encendido;
+        this.sensores = sensores;
     }
 
-    public double getVelocidad() {
+    public void actualizar(double incrementoDistancia, double nuevaVelocidad, int nuevaRPM) {
+        if (encendido.estaEncendido() && !sensores.isFrenoManoActivo()) {
+            if (nuevaVelocidad >= 0 && nuevaRPM >= 0) {
+                this.distancia += incrementoDistancia;
+                this.velocidad = nuevaVelocidad;
+                this.rpm = nuevaRPM;
+            }
+        }
+    }
+
+    public double getDistancia(){
+        return distancia; 
+    }
+    public double getVelocidad(){
         return velocidad;
     }
-
-    public int getRpm() {
+    public int getRPM(){
         return rpm;
-    }
- 
-    public void actualizar(double incrementoDistancia, double nuevaVelocidad, int nuevaRPM) {
-        this.distancia += incrementoDistancia;
-        this.velocidad = nuevaVelocidad;
-        this.rpm = nuevaRPM;
     }
 }

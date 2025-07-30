@@ -12,9 +12,9 @@ import Enums.EstadoPuerta;
  */
 public class sistemaPuertas {
     private EstadoPuerta[] puertas;
-    private SistemaAlarmaBloqueo alarmaBloqueo;
+    private sistemaAlarmaBloqueo alarmaBloqueo;
 
-    public sistemaPuertas(int totalPuertas, SistemaAlarmaBloqueo alarmaBloqueo) {
+    public sistemaPuertas(int totalPuertas, sistemaAlarmaBloqueo alarmaBloqueo) {
         this.alarmaBloqueo = alarmaBloqueo;
         puertas = new EstadoPuerta[totalPuertas];
         for (int i = 0; i < totalPuertas; i++) {
@@ -24,7 +24,7 @@ public class sistemaPuertas {
 
     public boolean abrirPuerta(int indice) {
         if (alarmaBloqueo.isPuertasBloqueadas()) {
-            return false; // No se puede abrir puerta bloqueada
+            return false; 
         }
         puertas[indice] = EstadoPuerta.ABIERTA;
         return true;
