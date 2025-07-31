@@ -60,7 +60,7 @@ public class FrmAuto extends javax.swing.JFrame {
         jPanel1.setOpaque(false);
 
         btnPanelSubSIstemas.setBackground(new java.awt.Color(0, 0, 0));
-        btnPanelSubSIstemas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/btn encender.png"))); // NOI18N
+        btnPanelSubSIstemas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/btnencender.png"))); // NOI18N
         btnPanelSubSIstemas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPanelSubSIstemasActionPerformed(evt);
@@ -108,7 +108,9 @@ public class FrmAuto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPanelSubSIstemasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPanelSubSIstemasActionPerformed
-        // TODO add your handling code here:
+        FrmSubSistemas ventanaSubsistemas = new FrmSubSistemas();
+        ventanaSubsistemas.setLocationRelativeTo(this); // Centrar respecto a FrmAuto
+        ventanaSubsistemas.setVisible(true);
     }//GEN-LAST:event_btnPanelSubSIstemasActionPerformed
 
     private void btnVolanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolanteActionPerformed
