@@ -4,18 +4,20 @@
  */
 package Vista;
 
+import Controlador.Control;
+
 /**
  *
  * @author ilope
  */
 public class FrmAuto extends javax.swing.JFrame {
+   
+    private Control control;
 
-    /**
-     * Creates new form FrmAuto
-     */
-    public FrmAuto() {
-        initComponents();
-    }
+    public FrmAuto(Control control) {
+    this.control = control;
+    initComponents();
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -108,9 +110,9 @@ public class FrmAuto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPanelSubSIstemasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPanelSubSIstemasActionPerformed
-        FrmSubSistemas ventanaSubsistemas = new FrmSubSistemas();
-        ventanaSubsistemas.setLocationRelativeTo(this); // Centrar respecto a FrmAuto
-        ventanaSubsistemas.setVisible(true);
+        FrmSubSistemas ventanaSubsistemas = new FrmSubSistemas(control);
+    ventanaSubsistemas.setLocationRelativeTo(this);
+    ventanaSubsistemas.setVisible(true);
     }//GEN-LAST:event_btnPanelSubSIstemasActionPerformed
 
     private void btnVolanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolanteActionPerformed
@@ -146,10 +148,11 @@ public class FrmAuto extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FrmAuto().setVisible(true);
-            }
-        });
+        public void run() {
+            Control control = new Control(4, 1); // 4 puertas, 1 cinturón del piloto
+            new FrmAuto(control).setVisible(true);
+        }
+    });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

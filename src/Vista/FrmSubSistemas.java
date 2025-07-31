@@ -4,6 +4,7 @@
  */
 package Vista;
 
+import Controlador.Control;
 import java.awt.Frame;
 
 /**
@@ -11,14 +12,11 @@ import java.awt.Frame;
  * @author ilope
  */
 public class FrmSubSistemas extends javax.swing.JFrame {
-
-    /**
-     * Creates new form FrmSubSistemas
-     */
-    public FrmSubSistemas() {
-        initComponents();
-        
-    }
+    private Control control;
+    public FrmSubSistemas(Control control) {
+    this.control = control;
+    initComponents();
+}
 
     
 
@@ -71,6 +69,11 @@ public class FrmSubSistemas extends javax.swing.JFrame {
         btnAlarma.setForeground(new java.awt.Color(255, 255, 255));
         btnAlarma.setText("Alarma");
         btnAlarma.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
+        btnAlarma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlarmaActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnAlarma, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 180, 190, 70));
 
         btnRadio.setBackground(new java.awt.Color(0, 0, 0));
@@ -100,6 +103,11 @@ public class FrmSubSistemas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnAlarmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlarmaActionPerformed
+        frmAlarmaBloqueo frame = new frmAlarmaBloqueo(control);
+        frame.setVisible(true);
+    }//GEN-LAST:event_btnAlarmaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -128,11 +136,7 @@ public class FrmSubSistemas extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FrmSubSistemas().setVisible(true);
-            }
-        });
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
