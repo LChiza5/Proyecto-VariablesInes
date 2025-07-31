@@ -35,6 +35,7 @@ public class FrmSubSistemas extends javax.swing.JFrame {
         btnAlarma = new javax.swing.JButton();
         btnRadio = new javax.swing.JButton();
         btnClimatizacion = new javax.swing.JButton();
+        btnVolver = new javax.swing.JButton();
         btnParabrisas = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
@@ -55,6 +56,11 @@ public class FrmSubSistemas extends javax.swing.JFrame {
         btnPuertas.setForeground(new java.awt.Color(255, 255, 255));
         btnPuertas.setText("Puertas");
         btnPuertas.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
+        btnPuertas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPuertasActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnPuertas, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, 190, 70));
 
         btnCinturones.setBackground(new java.awt.Color(0, 0, 0));
@@ -90,6 +96,18 @@ public class FrmSubSistemas extends javax.swing.JFrame {
         btnClimatizacion.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
         getContentPane().add(btnClimatizacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 320, 180, 70));
 
+        btnVolver.setBackground(new java.awt.Color(0, 0, 0));
+        btnVolver.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        btnVolver.setForeground(new java.awt.Color(255, 255, 255));
+        btnVolver.setText("Volver");
+        btnVolver.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 460, 180, 50));
+
         btnParabrisas.setBackground(new java.awt.Color(0, 0, 0));
         btnParabrisas.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
         btnParabrisas.setForeground(new java.awt.Color(255, 255, 255));
@@ -98,7 +116,7 @@ public class FrmSubSistemas extends javax.swing.JFrame {
         getContentPane().add(btnParabrisas, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 320, 180, 70));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/fondoAzul.png"))); // NOI18N
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 450));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 540));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -107,6 +125,15 @@ public class FrmSubSistemas extends javax.swing.JFrame {
         frmAlarmaBloqueo frame = new frmAlarmaBloqueo(control);
         frame.setVisible(true);
     }//GEN-LAST:event_btnAlarmaActionPerformed
+
+    private void btnPuertasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPuertasActionPerformed
+        FrmPuerta frmPuerta = new FrmPuerta(control);  // pasar el controlador actual
+    frmPuerta.setVisible(true);
+    }//GEN-LAST:event_btnPuertasActionPerformed
+
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnVolverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -146,6 +173,7 @@ public class FrmSubSistemas extends javax.swing.JFrame {
     private javax.swing.JButton btnParabrisas;
     private javax.swing.JButton btnPuertas;
     private javax.swing.JButton btnRadio;
+    private javax.swing.JButton btnVolver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables

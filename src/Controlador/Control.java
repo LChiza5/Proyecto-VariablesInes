@@ -88,6 +88,11 @@ public class Control{
     public EstadoPuerta getEstadoPuerta(int indice) {
         return puertas.getEstadoPuerta(indice);
     }
+    
+    public boolean getEstadoPuertasBloqueadas() {
+    return alarmaBloqueo.isPuertasBloqueadas();
+    }
+
 
     // Métodos para cinturón
     public void abrocharCinturon() {
