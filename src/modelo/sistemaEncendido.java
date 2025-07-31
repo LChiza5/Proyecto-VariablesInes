@@ -83,5 +83,10 @@ public class sistemaEncendido {
     public EstadoEncendido getEstado() {
         return estado;
     }
+    
+    public void setEstado(EstadoEncendido estado) {
+    this.estado = estado;
+    }
+
   }
 

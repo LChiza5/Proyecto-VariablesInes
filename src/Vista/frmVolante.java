@@ -55,6 +55,7 @@ public class frmVolante extends javax.swing.JFrame {
         rbtnBjas = new javax.swing.JRadioButton();
         rbtnAltas = new javax.swing.JRadioButton();
         jLabel8 = new javax.swing.JLabel();
+        btnEncender = new javax.swing.JToggleButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -158,48 +159,71 @@ public class frmVolante extends javax.swing.JFrame {
         jLabel8.setOpaque(true);
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 90, -1, -1));
 
+        btnEncender.setBackground(new java.awt.Color(0, 51, 102));
+        btnEncender.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnEncender.setForeground(new java.awt.Color(255, 255, 255));
+        btnEncender.setText("Encender motor");
+        btnEncender.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnEncender.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEncenderActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnEncender, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 260, 140, 30));
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/frmVolante.jpg"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 880, 500));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
     private void configurarEventos() {
-    // Timer para acelerar
+   final boolean[] mensajeMostrado = {false};
+
     timerAcelerar = new Timer(100, new ActionListener() {
         public void actionPerformed(ActionEvent e) {
-            if (control.getEstadoEncendido().name().equals("ENCENDIDO") && control.getNivelEnergia() > 0) {
+            if (control.getEstadoEncendido() == EstadoEncendido.ENCENDIDO && control.getNivelEnergia() > 0) {
                 int velocidad = sliderVelocidad.getValue();
                 if (velocidad < 120) {
                     velocidad++;
                     sliderVelocidad.setValue(velocidad);
                     lblVelocidad.setText("Velocidad: " + velocidad + " km/h");
                     control.consumirEnergia(0.3);
-                    control.actualizarKilometraje(0.05, velocidad, velocidad * 40); // ejemplo de RPM
+                    control.actualizarKilometraje(0.05, velocidad, velocidad * 40);
                 }
+                mensajeMostrado[0] = false; // Reiniciar para próximo ciclo
             } else {
-                JOptionPane.showMessageDialog(null, "Motor apagado o sin energía.");
+                if (!mensajeMostrado[0]) {  // Solo mostrar mensaje una vez
+                    JOptionPane.showMessageDialog(null, "Motor apagado o sin energía.");
+                    mensajeMostrado[0] = true;
+                }
                 timerAcelerar.stop();
             }
         }
     });
 
-    // Timer para frenar
     timerFrenar = new Timer(100, new ActionListener() {
         public void actionPerformed(ActionEvent e) {
-            int velocidad = sliderVelocidad.getValue();
-            if (velocidad > 0) {
-                velocidad--;
-                sliderVelocidad.setValue(velocidad);
-                lblVelocidad.setText("Velocidad: " + velocidad + " km/h");
-                control.actualizarKilometraje(0.02, velocidad, velocidad * 30); // RPM más bajo
+            if (control.getEstadoEncendido() == EstadoEncendido.ENCENDIDO) {
+                int velocidad = sliderVelocidad.getValue();
+                if (velocidad > 0) {
+                    velocidad--;
+                    sliderVelocidad.setValue(velocidad);
+                    lblVelocidad.setText("Velocidad: " + velocidad + " km/h");
+                    control.actualizarKilometraje(0.02, velocidad, velocidad * 30);
+                }
+            } else {
+                timerFrenar.stop();
             }
         }
     });
 
-    // Eventos de mouse para acelerar
     btnAcelerar.addMouseListener(new java.awt.event.MouseAdapter() {
         public void mousePressed(java.awt.event.MouseEvent evt) {
-            timerAcelerar.start();
+            if (control.getEstadoEncendido() == EstadoEncendido.ENCENDIDO && control.getNivelEnergia() > 0) {
+                timerAcelerar.start();
+            } else {
+                JOptionPane.showMessageDialog(null, "No se puede acelerar. El motor está apagado o sin energía.");
+            }
         }
 
         public void mouseReleased(java.awt.event.MouseEvent evt) {
@@ -207,7 +231,6 @@ public class frmVolante extends javax.swing.JFrame {
         }
     });
 
-    // Eventos de mouse para frenar
     btnFrenar.addMouseListener(new java.awt.event.MouseAdapter() {
         public void mousePressed(java.awt.event.MouseEvent evt) {
             timerFrenar.start();
@@ -219,12 +242,25 @@ public class frmVolante extends javax.swing.JFrame {
     });
 }
     private void btnAcelerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcelerarActionPerformed
-       
+        // TODO add your handling code here:
     }//GEN-LAST:event_btnAcelerarActionPerformed
 
     private void btnFrenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFrenarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnFrenarActionPerformed
+
+    private void btnEncenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncenderActionPerformed
+        if (btnEncender.isSelected()) {
+        control.encenderMotor();
+        btnEncender.setText("Apagar");
+        // Si querés también podés habilitar aquí el botón de acelerar
+        btnAcelerar.setEnabled(true);
+    } else {
+        control.apagarMotor();
+        btnEncender.setText("Encender");
+        btnAcelerar.setEnabled(false);
+    }
+    }//GEN-LAST:event_btnEncenderActionPerformed
 
     /**
      * @param args the command line arguments
@@ -263,6 +299,7 @@ public class frmVolante extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAcelerar;
+    private javax.swing.JToggleButton btnEncender;
     private javax.swing.JButton btnFrenar;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;

@@ -75,6 +75,15 @@ public class Control{
     public EstadoEncendido getEstadoEncendido() {
         return encendido.getEstado();
     }
+    
+    public void encenderMotor() {
+    encendido.setEstado(EstadoEncendido.ENCENDIDO);
+    }
+
+    public void apagarMotor() {
+    encendido.setEstado(EstadoEncendido.APAGADO);
+    }
+    
 
     // Métodos para puertas
     public boolean abrirPuerta(int indice) {
