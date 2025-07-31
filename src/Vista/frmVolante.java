@@ -4,19 +4,33 @@
  */
 package Vista;
 
+import Controlador.Control;
+import Enums.EstadoEncendido;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
+import javax.swing.Timer;
+import modelo.sistemaEnergia;
+
 /**
  *
  * @author Luisk
  */
 public class frmVolante extends javax.swing.JFrame {
-
+     private Control control;
+     private Timer timerAcelerar;
+     private Timer timerFrenar;
+     
+    
     /**
      * Creates new form frmVolante
      */
-    public frmVolante() {
+    public frmVolante(Control control) {
+        this.control = control;
         initComponents();
+        configurarEventos();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,11 +42,11 @@ public class frmVolante extends javax.swing.JFrame {
 
         jLabel2 = new javax.swing.JLabel();
         progresoEnergia = new javax.swing.JProgressBar();
-        sliderKilometraje = new javax.swing.JSlider();
+        sliderVelocidad = new javax.swing.JSlider();
         jLabel3 = new javax.swing.JLabel();
         btnAcelerar = new javax.swing.JButton();
         btnFrenar = new javax.swing.JButton();
-        lblKilometraje = new javax.swing.JLabel();
+        lblVelocidad = new javax.swing.JLabel();
         lblKilometrajeTotal = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jCheckBox1 = new javax.swing.JCheckBox();
@@ -61,7 +75,7 @@ public class frmVolante extends javax.swing.JFrame {
         progresoEnergia.setName(""); // NOI18N
         progresoEnergia.setRequestFocusEnabled(false);
         getContentPane().add(progresoEnergia, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 90, 140, 30));
-        getContentPane().add(sliderKilometraje, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, 200, 30));
+        getContentPane().add(sliderVelocidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, 200, 30));
 
         jLabel3.setBackground(new java.awt.Color(0, 51, 102));
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -72,22 +86,31 @@ public class frmVolante extends javax.swing.JFrame {
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, 130, -1));
 
         btnAcelerar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/btnAcelerar.png"))); // NOI18N
+        btnAcelerar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAcelerarActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnAcelerar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 350, 110, 80));
 
         btnFrenar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/btnFrenar.png"))); // NOI18N
         btnFrenar.setText("frenar");
+        btnFrenar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFrenarActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnFrenar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, 110, 80));
 
-        lblKilometraje.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblKilometraje.setText("0");
-        getContentPane().add(lblKilometraje, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 220, 20, 20));
+        lblVelocidad.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblVelocidad.setText("0");
+        getContentPane().add(lblVelocidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 220, 20, 20));
 
         lblKilometrajeTotal.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblKilometrajeTotal.setText("000000");
         getContentPane().add(lblKilometrajeTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 240, -1, -1));
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/image (3).png"))); // NOI18N
-        jLabel4.setText("jLabel4");
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/lblKilometraje.png"))); // NOI18N
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 200, 200));
 
         jCheckBox1.setBackground(new java.awt.Color(0, 51, 102));
@@ -140,6 +163,68 @@ public class frmVolante extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    private void configurarEventos() {
+    // Timer para acelerar
+    timerAcelerar = new Timer(100, new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            if (control.getEstadoEncendido().name().equals("ENCENDIDO") && control.getNivelEnergia() > 0) {
+                int velocidad = sliderVelocidad.getValue();
+                if (velocidad < 120) {
+                    velocidad++;
+                    sliderVelocidad.setValue(velocidad);
+                    lblVelocidad.setText("Velocidad: " + velocidad + " km/h");
+                    control.consumirEnergia(0.3);
+                    control.actualizarKilometraje(0.05, velocidad, velocidad * 40); // ejemplo de RPM
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Motor apagado o sin energía.");
+                timerAcelerar.stop();
+            }
+        }
+    });
+
+    // Timer para frenar
+    timerFrenar = new Timer(100, new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            int velocidad = sliderVelocidad.getValue();
+            if (velocidad > 0) {
+                velocidad--;
+                sliderVelocidad.setValue(velocidad);
+                lblVelocidad.setText("Velocidad: " + velocidad + " km/h");
+                control.actualizarKilometraje(0.02, velocidad, velocidad * 30); // RPM más bajo
+            }
+        }
+    });
+
+    // Eventos de mouse para acelerar
+    btnAcelerar.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mousePressed(java.awt.event.MouseEvent evt) {
+            timerAcelerar.start();
+        }
+
+        public void mouseReleased(java.awt.event.MouseEvent evt) {
+            timerAcelerar.stop();
+        }
+    });
+
+    // Eventos de mouse para frenar
+    btnFrenar.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mousePressed(java.awt.event.MouseEvent evt) {
+            timerFrenar.start();
+        }
+
+        public void mouseReleased(java.awt.event.MouseEvent evt) {
+            timerFrenar.stop();
+        }
+    });
+}
+    private void btnAcelerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcelerarActionPerformed
+       
+    }//GEN-LAST:event_btnAcelerarActionPerformed
+
+    private void btnFrenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFrenarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnFrenarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -171,7 +256,7 @@ public class frmVolante extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmVolante().setVisible(true);
+                
             }
         });
     }
@@ -186,12 +271,12 @@ public class frmVolante extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel lblKilometraje;
     private javax.swing.JLabel lblKilometrajeTotal;
+    private javax.swing.JLabel lblVelocidad;
     private javax.swing.JProgressBar progresoEnergia;
     private javax.swing.JRadioButton rbtnAltas;
     private javax.swing.JRadioButton rbtnApagadas;
     private javax.swing.JRadioButton rbtnBjas;
-    private javax.swing.JSlider sliderKilometraje;
+    private javax.swing.JSlider sliderVelocidad;
     // End of variables declaration//GEN-END:variables
 }

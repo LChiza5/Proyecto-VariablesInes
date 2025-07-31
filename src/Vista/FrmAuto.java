@@ -116,7 +116,9 @@ public class FrmAuto extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPanelSubSIstemasActionPerformed
 
     private void btnVolanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolanteActionPerformed
-        
+        frmVolante ventanaVolante = new frmVolante(control);
+        ventanaVolante.setLocationRelativeTo(this);
+        ventanaVolante.setVisible(true);
     }//GEN-LAST:event_btnVolanteActionPerformed
 
     /**
