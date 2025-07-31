@@ -39,6 +39,7 @@ public class FrmClimatizacion extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        JPanel.setBackground(new java.awt.Color(0, 0, 0));
         JPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         JPanel.setForeground(new java.awt.Color(0, 0, 153));
 
@@ -102,11 +103,11 @@ public class FrmClimatizacion extends javax.swing.JFrame {
         });
 
         Velocidades.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        Velocidades.setForeground(new java.awt.Color(0, 0, 0));
+        Velocidades.setForeground(new java.awt.Color(255, 255, 255));
         Velocidades.setText("Velocidad:");
 
         VarNivel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        VarNivel.setForeground(new java.awt.Color(0, 0, 0));
+        VarNivel.setForeground(new java.awt.Color(255, 255, 255));
         VarNivel.setText("Nula");
 
         Encender.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/encendido-apagado.png"))); // NOI18N
