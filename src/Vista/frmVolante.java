@@ -32,10 +32,6 @@ public class frmVolante extends javax.swing.JFrame {
         initComponents();
         sliderVelocidad.setMaximum(220);
         configurarEventos();
-        ButtonGroup grupoLuces = new ButtonGroup();
-        grupoLuces.add(rbtnApagadas);
-        grupoLuces.add(rbtnBajas);
-        grupoLuces.add(rbtnAltas);
     }
     
     /**
@@ -248,13 +244,18 @@ public class frmVolante extends javax.swing.JFrame {
         }
     });
     
+    ButtonGroup grupoLuces = new ButtonGroup();
+    grupoLuces.add(rbtnApagadas);
+    grupoLuces.add(rbtnBajas);
+    grupoLuces.add(rbtnAltas);
+    
   rbtnApagadas.addActionListener(new ActionListener() {
     public void actionPerformed(ActionEvent e) {
         if (control.getEstadoEncendido() == EstadoEncendido.ENCENDIDO) {
             control.cambiarLucesDelanteras(TipoLuz.APAGADA);
         } else {
             JOptionPane.showMessageDialog(null, "El vehículo está apagado. No se pueden encender las luces.");
-            rbtnApagadas.setSelected(false);
+            grupoLuces.clearSelection(); // 🔹 Esto desmarca el botón
         }
     }
 });
@@ -265,7 +266,7 @@ rbtnBajas.addActionListener(new ActionListener() {
             control.cambiarLucesDelanteras(TipoLuz.BAJA);
         } else {
             JOptionPane.showMessageDialog(null, "El vehículo está apagado. No se pueden encender las luces.");
-            rbtnBajas.setSelected(false);
+            grupoLuces.clearSelection(); // 🔹 Esto desmarca el botón
         }
     }
 });
@@ -276,7 +277,7 @@ rbtnAltas.addActionListener(new ActionListener() {
             control.cambiarLucesDelanteras(TipoLuz.ALTA);
         } else {
             JOptionPane.showMessageDialog(null, "El vehículo está apagado. No se pueden encender las luces.");
-            rbtnAltas.setSelected(false);
+            grupoLuces.clearSelection(); // 🔹 Esto desmarca el botón
             }
         }
     });
