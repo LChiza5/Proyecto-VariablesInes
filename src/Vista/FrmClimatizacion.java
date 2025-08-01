@@ -6,9 +6,8 @@ package Vista;
 
 import Controlador.Control;
 import Enums.EstadoClimatizado;
-import Enums.EstadoEncendido;
-import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -16,14 +15,30 @@ import javax.swing.JOptionPane;
  */
 public class FrmClimatizacion extends javax.swing.JFrame {
         private Control control;
-        
-   
+    private EstadoClimatizado[] velocidades = EstadoClimatizado.values();
+    private int indiceVelocidad = 0; // Empieza en APAGADO
 
-    /**
-     * Creates new form FrmClimatizacion
-     */
-    public FrmClimatizacion() {
+    public FrmClimatizacion(Control control) {
+        this.control = control;
         initComponents();
+        sincronizarEstado();
+    }
+    private void sincronizarEstado() {
+        boolean activo = control.getVelocidadClimatizacion() != EstadoClimatizado.APAGADO;
+        toggleClima.setSelected(activo);
+        toggleClima.setText(activo ? "Apagar" : "Encender");
+
+        if (control.getVelocidadClimatizacion() != null) {
+            indiceVelocidad = control.getVelocidadClimatizacion().ordinal();
+        }
+
+        actualizarEtiquetaEstado();
+    }
+
+    private void actualizarEtiquetaEstado() {
+        EstadoClimatizado velocidad = control.getVelocidadClimatizacion();
+        String modo = control.isACActivo() ? "A/C" : control.isCalefaccionActiva() ? "Calefacción" : "Apagado";
+        lblEstado.setText("Modo: " + modo + ", Velocidad: " + velocidad);
     }
         
 
@@ -36,237 +51,207 @@ public class FrmClimatizacion extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        JPanel = new javax.swing.JPanel();
-        BtnAC = new javax.swing.JButton();
-        BtnCalefaccion = new javax.swing.JButton();
-        BtnMas = new javax.swing.JButton();
-        BtnMenos = new javax.swing.JButton();
-        Velocidades = new javax.swing.JLabel();
-        VarNivel = new javax.swing.JLabel();
-        Encender = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        toggleClima = new javax.swing.JToggleButton();
+        btnCalefaccion = new javax.swing.JButton();
+        btnAC = new javax.swing.JButton();
+        btnAumentar = new javax.swing.JButton();
+        btnDisminuir = new javax.swing.JButton();
+        lblEstado = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        btnVolver = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        JPanel.setBackground(new java.awt.Color(0, 0, 0));
-        JPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        JPanel.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel2.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Climatizacion");
+        jLabel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 130, 50));
 
-        BtnAC.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        BtnAC.setForeground(new java.awt.Color(0, 0, 0));
-        BtnAC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/aire-acondicionado_32.png"))); // NOI18N
-        BtnAC.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        BtnAC.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/aire-acondicionado_64.png"))); // NOI18N
-        BtnAC.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/aire-acondicionado_64.png"))); // NOI18N
-        BtnAC.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        BtnAC.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                BtnACMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                BtnACMouseExited(evt);
-            }
-        });
-        BtnAC.addActionListener(new java.awt.event.ActionListener() {
+        toggleClima.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/encendido-apagado.png"))); // NOI18N
+        toggleClima.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnACActionPerformed(evt);
+                toggleClimaActionPerformed(evt);
             }
         });
+        getContentPane().add(toggleClima, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 30, 40, 40));
 
-        BtnCalefaccion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        BtnCalefaccion.setForeground(new java.awt.Color(0, 0, 0));
-        BtnCalefaccion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/calefaccion_32.png"))); // NOI18N
-        BtnCalefaccion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        BtnCalefaccion.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/calefaccion_64.png"))); // NOI18N
-        BtnCalefaccion.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/calefaccion_64.png"))); // NOI18N
-        BtnCalefaccion.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        BtnCalefaccion.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                BtnCalefaccionMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                BtnCalefaccionMouseExited(evt);
-            }
-        });
-        BtnCalefaccion.addActionListener(new java.awt.event.ActionListener() {
+        btnCalefaccion.setBackground(new java.awt.Color(255, 102, 51));
+        btnCalefaccion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/calefaccion_32.png"))); // NOI18N
+        btnCalefaccion.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 102, 51), 2, true));
+        btnCalefaccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnCalefaccionActionPerformed(evt);
+                btnCalefaccionActionPerformed(evt);
             }
         });
+        getContentPane().add(btnCalefaccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, 80, 60));
 
-        BtnMas.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        BtnMas.setForeground(new java.awt.Color(0, 0, 0));
-        BtnMas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/agregar.png"))); // NOI18N
-        BtnMas.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        BtnMas.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        BtnMas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                BtnMasMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                BtnMasMouseExited(evt);
-            }
-        });
-        BtnMas.addActionListener(new java.awt.event.ActionListener() {
+        btnAC.setBackground(new java.awt.Color(0, 0, 0));
+        btnAC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/aire-acondicionado_32.png"))); // NOI18N
+        btnAC.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 204), 2, true));
+        btnAC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnMasActionPerformed(evt);
+                btnACActionPerformed(evt);
             }
         });
+        getContentPane().add(btnAC, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 210, 90, 60));
 
-        BtnMenos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        BtnMenos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/boton-menos.png"))); // NOI18N
-        BtnMenos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        BtnMenos.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        BtnMenos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                BtnMenosMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                BtnMenosMouseExited(evt);
-            }
-        });
-
-        Velocidades.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        Velocidades.setForeground(new java.awt.Color(255, 255, 255));
-        Velocidades.setText("Velocidad:");
-
-        VarNivel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        VarNivel.setForeground(new java.awt.Color(255, 255, 255));
-
-        Encender.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/encendido-apagado.png"))); // NOI18N
-        Encender.addActionListener(new java.awt.event.ActionListener() {
+        btnAumentar.setBackground(new java.awt.Color(0, 153, 0));
+        btnAumentar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/agregar.png"))); // NOI18N
+        btnAumentar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 0), 2, true));
+        btnAumentar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EncenderActionPerformed(evt);
+                btnAumentarActionPerformed(evt);
             }
         });
+        getContentPane().add(btnAumentar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 350, 40, 40));
 
-        javax.swing.GroupLayout JPanelLayout = new javax.swing.GroupLayout(JPanel);
-        JPanel.setLayout(JPanelLayout);
-        JPanelLayout.setHorizontalGroup(
-            JPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(JPanelLayout.createSequentialGroup()
-                .addGroup(JPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(JPanelLayout.createSequentialGroup()
-                        .addGap(92, 92, 92)
-                        .addComponent(BtnAC, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(JPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(Encender, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(JPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Velocidades, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(BtnMenos, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(18, 18, 18)
-                .addGroup(JPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BtnCalefaccion, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(JPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(VarNivel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(BtnMas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)))
-                .addContainerGap(70, Short.MAX_VALUE))
-        );
-        JPanelLayout.setVerticalGroup(
-            JPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(JPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(JPanelLayout.createSequentialGroup()
-                        .addGroup(JPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Velocidades)
-                            .addComponent(VarNivel, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE))
-                        .addGap(15, 15, 15)
-                        .addGroup(JPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(BtnMas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(BtnMenos, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)))
-                    .addGroup(JPanelLayout.createSequentialGroup()
-                        .addComponent(Encender)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(18, 18, 18)
-                .addGroup(JPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BtnCalefaccion, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtnAC, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(74, 74, 74))
-        );
+        btnDisminuir.setBackground(new java.awt.Color(153, 0, 0));
+        btnDisminuir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/boton-menos.png"))); // NOI18N
+        btnDisminuir.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 0, 0), 2, true));
+        btnDisminuir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDisminuirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnDisminuir, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 350, 40, 40));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(JPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(JPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        lblEstado.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        lblEstado.setForeground(new java.awt.Color(255, 255, 255));
+        lblEstado.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
+        getContentPane().add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 300, 30));
+
+        jLabel6.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Velocidad del Climatizado");
+        jLabel6.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 300, -1, -1));
+
+        jLabel7.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Calefaccion |   A/C");
+        jLabel7.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, 140, 30));
+
+        btnVolver.setBackground(new java.awt.Color(0, 0, 0));
+        btnVolver.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        btnVolver.setForeground(new java.awt.Color(255, 255, 255));
+        btnVolver.setText("Volver");
+        btnVolver.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 410, 90, 40));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/fondoAzul.png"))); // NOI18N
+        jLabel1.setText("jLabel1");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 480));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BtnACMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnACMouseEntered
-        BtnAC.setText("AC");
-    }//GEN-LAST:event_BtnACMouseEntered
+    private void btnCalefaccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalefaccionActionPerformed
+        activarCalefaccion();
+    }//GEN-LAST:event_btnCalefaccionActionPerformed
 
-    private void BtnCalefaccionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnCalefaccionMouseEntered
-        BtnCalefaccion.setText("Calefacción");
-    }//GEN-LAST:event_BtnCalefaccionMouseEntered
+    private void toggleClimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toggleClimaActionPerformed
+        if (!control.permiteClimatizacion()) {
+            JOptionPane.showMessageDialog(this, "El auto debe estar encendido para usar la climatización.");
+            toggleClima.setSelected(false);
+            return;
+        }
 
-    private void BtnCalefaccionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnCalefaccionMouseExited
-        BtnCalefaccion.setText("");
-    }//GEN-LAST:event_BtnCalefaccionMouseExited
+        if (toggleClima.isSelected()) {
+            // Activar A/C por defecto
+            control.activarAC(true);
+            indiceVelocidad = EstadoClimatizado.BAJA.ordinal();
+            control.cambiarVelocidadClimatizacion(EstadoClimatizado.BAJA);
+            toggleClima.setText("Apagar");
+        } else {
+            control.apagarClimatizacion();
+            indiceVelocidad = 0;
+            toggleClima.setText("Encender");
+        }
+        actualizarEtiquetaEstado();
+    }//GEN-LAST:event_toggleClimaActionPerformed
 
-    private void BtnACMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnACMouseExited
-        BtnAC.setText("");
-    }//GEN-LAST:event_BtnACMouseExited
+    private void btnACActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnACActionPerformed
+        activarAC();
+    }//GEN-LAST:event_btnACActionPerformed
 
-    private void BtnMasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnMasMouseEntered
-        BtnMas.setText("Subir");
-    }//GEN-LAST:event_BtnMasMouseEntered
+    private void btnDisminuirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDisminuirActionPerformed
+       cambiarVelocidad(-1);
+    }//GEN-LAST:event_btnDisminuirActionPerformed
 
-    private void BtnMenosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnMenosMouseEntered
-        BtnMenos.setText("Bajar");
-    }//GEN-LAST:event_BtnMenosMouseEntered
+    private void btnAumentarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAumentarActionPerformed
+       cambiarVelocidad(1);
+    }//GEN-LAST:event_btnAumentarActionPerformed
 
-    private void BtnMasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnMasMouseExited
-        BtnMas.setText("");
-    }//GEN-LAST:event_BtnMasMouseExited
-
-    private void BtnMenosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnMenosMouseExited
-          BtnMenos.setText("");
-    }//GEN-LAST:event_BtnMenosMouseExited
-
-    private void EncenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EncenderActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_EncenderActionPerformed
-
-    private void BtnACActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnACActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BtnACActionPerformed
-
-    private void BtnCalefaccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCalefaccionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BtnCalefaccionActionPerformed
-
-    private void BtnMasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnMasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BtnMasActionPerformed
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnVolverActionPerformed
     
+    private void cambiarVelocidad(int cambio) {
+        if (!control.permiteClimatizacion()) {
+            JOptionPane.showMessageDialog(this, "Auto apagado. No se puede cambiar la velocidad.");
+            return;
+        }
+
+        if (!toggleClima.isSelected()) {
+            JOptionPane.showMessageDialog(this, "Primero enciende la climatización.");
+            return;
+        }
+
+        indiceVelocidad = Math.max(1, Math.min(indiceVelocidad + cambio, velocidades.length - 1));
+        control.cambiarVelocidadClimatizacion(velocidades[indiceVelocidad]);
+        actualizarEtiquetaEstado();
+    }
+
+    private void activarAC() {
+        if (!control.permiteClimatizacion()) {
+            JOptionPane.showMessageDialog(this, "Auto apagado. No se puede activar A/C.");
+            return;
+        }
+        control.activarAC(true);
+        control.cambiarVelocidadClimatizacion(velocidades[indiceVelocidad == 0 ? 1 : indiceVelocidad]);
+        toggleClima.setSelected(true);
+        toggleClima.setText("Apagar");
+        actualizarEtiquetaEstado();
+    }
+
+    private void activarCalefaccion() {
+        if (!control.permiteClimatizacion()) {
+            JOptionPane.showMessageDialog(this, "Auto apagado. No se puede activar calefacción.");
+            return;
+        }
+        control.activarCalefaccion(true);
+        control.cambiarVelocidadClimatizacion(velocidades[indiceVelocidad == 0 ? 1 : indiceVelocidad]);
+        toggleClima.setSelected(true);
+        toggleClima.setText("Apagar");
+        actualizarEtiquetaEstado();
+    }
     /**
      * @param args the command line arguments
      */
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtnAC;
-    private javax.swing.JButton BtnCalefaccion;
-    private javax.swing.JButton BtnMas;
-    private javax.swing.JButton BtnMenos;
-    private javax.swing.JButton Encender;
-    private javax.swing.JPanel JPanel;
-    private javax.swing.JLabel VarNivel;
-    private javax.swing.JLabel Velocidades;
+    private javax.swing.JButton btnAC;
+    private javax.swing.JButton btnAumentar;
+    private javax.swing.JButton btnCalefaccion;
+    private javax.swing.JButton btnDisminuir;
+    private javax.swing.JButton btnVolver;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel lblEstado;
+    private javax.swing.JToggleButton toggleClima;
     // End of variables declaration//GEN-END:variables
 }

@@ -104,6 +104,11 @@ public class FrmSubSistemas extends javax.swing.JFrame {
         btnClimatizacion.setForeground(new java.awt.Color(255, 255, 255));
         btnClimatizacion.setText("Climatizacion");
         btnClimatizacion.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
+        btnClimatizacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClimatizacionActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnClimatizacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 320, 180, 70));
 
         btnVolver.setBackground(new java.awt.Color(0, 0, 0));
@@ -154,6 +159,11 @@ public class FrmSubSistemas extends javax.swing.JFrame {
         FrmCinturones frame = new FrmCinturones(control);
         frame.setVisible(true);
     }//GEN-LAST:event_btnCinturonesActionPerformed
+
+    private void btnClimatizacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClimatizacionActionPerformed
+        FrmClimatizacion frame = new FrmClimatizacion(control);
+        frame.setVisible(true);
+    }//GEN-LAST:event_btnClimatizacionActionPerformed
 
     /**
      * @param args the command line arguments

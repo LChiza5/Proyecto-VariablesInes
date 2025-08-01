@@ -191,6 +191,25 @@ public class Control{
     public void activarCalefaccion(boolean estado) {
         climatizacion.activarModoCalefaccion(estado);
     }
+    public EstadoClimatizado getVelocidadClimatizacion() {
+    return climatizacion.getVelocidad();
+    }
+
+    public boolean isACActivo() {
+    return climatizacion.isAC();
+    }
+
+    public boolean isCalefaccionActiva() {
+    return climatizacion.isCalefaccion();
+    }
+
+    public void apagarClimatizacion() {
+    climatizacion.apagar();
+    }
+
+    public boolean permiteClimatizacion() {
+    return encendido.permiteSubsistemasBasicos(); // Asumiendo que este método ya existe
+    }
 
     // Métodos para energía
     public double getNivelEnergia() {
