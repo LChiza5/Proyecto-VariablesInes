@@ -168,7 +168,6 @@ public class FrmClimatizacion extends javax.swing.JFrame {
         }
 
         if (toggleClima.isSelected()) {
-            // Activar A/C por defecto
             control.activarAC(true);
             indiceVelocidad = EstadoClimatizado.BAJA.ordinal();
             control.cambiarVelocidadClimatizacion(EstadoClimatizado.BAJA);

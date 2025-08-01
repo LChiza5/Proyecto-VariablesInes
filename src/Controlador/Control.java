@@ -65,7 +65,7 @@ public class Control{
         limpiaParabrisas.cambiarVelocidad(VelocidadLimpiaParabrisas.OFF);
         climatizacion.activarModoAC(false);
         climatizacion.activarModoCalefaccion(false);
-        // Aquí podrías apagar más subsistemas si quieres
+       
     }
 
     public void activarModoEmision() {
@@ -211,7 +211,7 @@ public class Control{
     }
 
     public boolean permiteClimatizacion() {
-    return encendido.permiteSubsistemasBasicos(); // Asumiendo que este método ya existe
+    return encendido.permiteSubsistemasBasicos(); 
     }
 
     // Métodos para energía

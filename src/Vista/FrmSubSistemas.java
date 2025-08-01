@@ -147,7 +147,7 @@ public class FrmSubSistemas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAlarmaActionPerformed
 
     private void btnPuertasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPuertasActionPerformed
-        FrmPuerta frmPuerta = new FrmPuerta(control);  // pasar el controlador actual
+        FrmPuerta frmPuerta = new FrmPuerta(control);  
     frmPuerta.setVisible(true);
     }//GEN-LAST:event_btnPuertasActionPerformed
 

@@ -58,8 +58,8 @@ public class sistemaRadio {
     
      public sistemaRadio(sistemaEncendido sistemaEncendido) {
         this.sistemaEncendido = sistemaEncendido;
-        this.modo = ModoRadio.FM;     // Por defecto
-        this.frecuencia = 98.5;       // FM típica
+        this.modo = ModoRadio.FM;     
+        this.frecuencia = 98.5;       
         this.encendido = false;
     }
 }
