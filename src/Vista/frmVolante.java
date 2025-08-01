@@ -93,7 +93,7 @@ public class frmVolante extends javax.swing.JFrame {
                 btnAcelerarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAcelerar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 350, 110, 80));
+        getContentPane().add(btnAcelerar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 340, 110, 80));
 
         btnFrenar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/btnFrenar.png"))); // NOI18N
         btnFrenar.setText("frenar");
