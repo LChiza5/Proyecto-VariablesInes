@@ -31,12 +31,12 @@ public class FrmLimpiaParabrisas extends javax.swing.JFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        EncendidoLimpiaParabrisas = new javax.swing.JToggleButton();
         jPanel2 = new javax.swing.JPanel();
         jRadioButton2 = new javax.swing.JRadioButton();
         jRadioButton3 = new javax.swing.JRadioButton();
         jRadioButton1 = new javax.swing.JRadioButton();
         jLabel2 = new javax.swing.JLabel();
-        EncendidoLimpiaParabrisas = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,7 +52,7 @@ public class FrmLimpiaParabrisas extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(61, 61, 61))
@@ -64,6 +64,29 @@ public class FrmLimpiaParabrisas extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 309, Short.MAX_VALUE)
                 .addContainerGap())
         );
+
+        EncendidoLimpiaParabrisas.setBackground(new java.awt.Color(102, 102, 102));
+        EncendidoLimpiaParabrisas.setForeground(new java.awt.Color(0, 0, 0));
+        EncendidoLimpiaParabrisas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/apagar (1).png"))); // NOI18N
+        EncendidoLimpiaParabrisas.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        EncendidoLimpiaParabrisas.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/encender (1).png"))); // NOI18N
+        EncendidoLimpiaParabrisas.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        EncendidoLimpiaParabrisas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                EncendidoLimpiaParabrisasMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                EncendidoLimpiaParabrisasMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                EncendidoLimpiaParabrisasMouseExited(evt);
+            }
+        });
+        EncendidoLimpiaParabrisas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EncendidoLimpiaParabrisasActionPerformed(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 102));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -119,52 +142,30 @@ public class FrmLimpiaParabrisas extends javax.swing.JFrame {
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
-        EncendidoLimpiaParabrisas.setBackground(new java.awt.Color(102, 102, 102));
-        EncendidoLimpiaParabrisas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/apagar (1).png"))); // NOI18N
-        EncendidoLimpiaParabrisas.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        EncendidoLimpiaParabrisas.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/encender (1).png"))); // NOI18N
-        EncendidoLimpiaParabrisas.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        EncendidoLimpiaParabrisas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                EncendidoLimpiaParabrisasMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                EncendidoLimpiaParabrisasMouseExited(evt);
-            }
-        });
-        EncendidoLimpiaParabrisas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EncendidoLimpiaParabrisasActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(162, 162, 162)
-                .addComponent(EncendidoLimpiaParabrisas, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(EncendidoLimpiaParabrisas, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(99, 99, 99))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(EncendidoLimpiaParabrisas, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(78, 78, 78))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(EncendidoLimpiaParabrisas))
+                .addGap(142, 142, 142))
         );
 
         pack();
@@ -179,12 +180,17 @@ public class FrmLimpiaParabrisas extends javax.swing.JFrame {
     }//GEN-LAST:event_EncendidoLimpiaParabrisasActionPerformed
 
     private void EncendidoLimpiaParabrisasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EncendidoLimpiaParabrisasMouseEntered
-        EncendidoLimpiaParabrisas.setText("Encender");
+        EncendidoLimpiaParabrisas.setText("Apagar");
     }//GEN-LAST:event_EncendidoLimpiaParabrisasMouseEntered
 
     private void EncendidoLimpiaParabrisasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EncendidoLimpiaParabrisasMouseExited
-        EncendidoLimpiaParabrisas.setText("Apagar");
+        EncendidoLimpiaParabrisas.setText("Encender");
     }//GEN-LAST:event_EncendidoLimpiaParabrisasMouseExited
+
+    private void EncendidoLimpiaParabrisasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EncendidoLimpiaParabrisasMouseClicked
+        EncendidoLimpiaParabrisas.setText("");
+        
+    }//GEN-LAST:event_EncendidoLimpiaParabrisasMouseClicked
 
     /**
      * @param args the command line arguments

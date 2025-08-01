@@ -4,12 +4,20 @@
  */
 package Vista;
 
+import Controlador.Control;
+import Enums.EstadoClimatizado;
+import Enums.EstadoEncendido;
+import java.awt.event.ActionEvent;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author huete
  */
 public class FrmClimatizacion extends javax.swing.JFrame {
-    
+        private Control control;
+        private EstadoClimatizado[] niveles = EstadoClimatizado.values();
+        private int indiceVelocidad =0;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmClimatizacion.class.getName());
 
     /**
@@ -17,7 +25,58 @@ public class FrmClimatizacion extends javax.swing.JFrame {
      */
     public FrmClimatizacion() {
         initComponents();
+        control = new Control(4,5);
+        BtnAC.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+              control.activarAC(true);
+              JOptionPane.showMessageDialog(null, "Aire acondicionado activado");
+            }
+        });
+         BtnCalefaccion.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                control.activarCalefaccion(true);
+                JOptionPane.showMessageDialog(null, "Calefacción activada");
+            }
+         });
+         BtnMas.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                 if (indiceVelocidad < niveles.length - 1){
+                     indiceVelocidad++;
+                     EstadoClimatizado nuevaVelocidad = niveles[indiceVelocidad];
+                     control.cambiarVelocidadClimatizacion(nuevaVelocidad);
+                     VarNivel.setText(nuevaVelocidad.toString());
+                 }
+            }
+         });
+         BtnMenos.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+               if (indiceVelocidad > 0){
+                  indiceVelocidad--;
+                  EstadoClimatizado nuevaVelocidad = niveles[indiceVelocidad];
+                  control.cambiarVelocidadClimatizacion(nuevaVelocidad);
+                  VarNivel.setText(nuevaVelocidad.toString());
+                  
+               }
+            }
+         });
+        Encender.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+             if (control.getEstadoEncendido() == EstadoEncendido.APAGADO){
+                 control.encenderMotor();
+                 JOptionPane.showMessageDialog(null , "Climatización encendida");
+             }else {
+                 control.apagarMotor();
+                 JOptionPane.showMessageDialog(null , "Climatización apagada");
+             }
+            }
+        });
     }
+        
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -56,6 +115,11 @@ public class FrmClimatizacion extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 BtnACMouseExited(evt);
+            }
+        });
+        BtnAC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnACActionPerformed(evt);
             }
         });
 
@@ -108,9 +172,13 @@ public class FrmClimatizacion extends javax.swing.JFrame {
 
         VarNivel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         VarNivel.setForeground(new java.awt.Color(255, 255, 255));
-        VarNivel.setText("Nula");
 
         Encender.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/encendido-apagado.png"))); // NOI18N
+        Encender.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EncenderActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout JPanelLayout = new javax.swing.GroupLayout(JPanel);
         JPanel.setLayout(JPanelLayout);
@@ -131,8 +199,9 @@ public class FrmClimatizacion extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(JPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(BtnCalefaccion, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(VarNivel, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtnMas, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(JPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(VarNivel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(BtnMas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)))
                 .addContainerGap(70, Short.MAX_VALUE))
         );
         JPanelLayout.setVerticalGroup(
@@ -210,6 +279,22 @@ public class FrmClimatizacion extends javax.swing.JFrame {
           BtnMenos.setText("");
     }//GEN-LAST:event_BtnMenosMouseExited
 
+    private void EncenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EncenderActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EncenderActionPerformed
+
+    private void BtnACActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnACActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnACActionPerformed
+    private String formatoVelocidad(EstadoClimatizado vel){
+        return switch (vel){
+            case APAGADO -> "Apagado";
+            case BAJA -> "Baja";
+            case MEDIA -> "Media";
+            case ALTA -> "Alta";
+        };
+        
+    }
     /**
      * @param args the command line arguments
      */
