@@ -86,6 +86,8 @@ public class frmVolante extends javax.swing.JFrame {
         jLabel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel2.setOpaque(true);
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 20, 100, 40));
+
+        sliderVelocidad.setEnabled(false);
         getContentPane().add(sliderVelocidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, 200, 30));
 
         jLabel3.setBackground(new java.awt.Color(0, 51, 102));
@@ -253,19 +255,32 @@ public class frmVolante extends javax.swing.JFrame {
     });
 
     btnAcelerar.addMouseListener(new java.awt.event.MouseAdapter() {
-        public void mousePressed(java.awt.event.MouseEvent evt) {
-            if (control.getEstadoEncendido() == EstadoEncendido.ENCENDIDO && control.getNivelEnergia() > 0) {
-                mensajeMostrado[0] = false;
-                timerAcelerar.start();
-            } else {
-                JOptionPane.showMessageDialog(null, "No se puede acelerar. El motor está apagado o sin energía.");
-            }
-        }
+    public void mousePressed(java.awt.event.MouseEvent evt) {
+        if (control.getEstadoEncendido() == EstadoEncendido.ENCENDIDO && control.getNivelEnergia() > 0) {
 
-        public void mouseReleased(java.awt.event.MouseEvent evt) {
-            timerAcelerar.stop();
+            if (!control.todasLasPuertasCerradas()) {
+                JOptionPane.showMessageDialog(null, "No se puede acelerar: hay una puerta abierta.");
+                return;
+            }
+
+            if (!control.sePuedeAcelerar()) {
+                JOptionPane.showMessageDialog(null, "Debe abrochar los cinturones del piloto y pasajero para poder acelerar.");
+                return;
+            }
+
+            mensajeMostrado[0] = false;
+            timerAcelerar.start();
+
+        } else {
+            JOptionPane.showMessageDialog(null, "No se puede acelerar. El motor está apagado o sin energía.");
         }
-    });
+    }
+
+    public void mouseReleased(java.awt.event.MouseEvent evt) {
+        timerAcelerar.stop();
+    }
+});
+
 
     btnFrenar.addMouseListener(new java.awt.event.MouseAdapter() {
         public void mousePressed(java.awt.event.MouseEvent evt) {

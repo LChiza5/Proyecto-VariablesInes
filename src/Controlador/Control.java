@@ -51,6 +51,7 @@ public class Control{
         this.climatizacion = new sistemaClimatizado(encendido);
         this.energia = new sistemaEnergia();
         this.kilometraje = new sistemaKilometraje(encendido, sensores);
+        this.cinturones = new sistemaCinturones();
     }
 
     // Métodos para controlar encendido
@@ -100,6 +101,10 @@ public class Control{
     public boolean getEstadoPuertasBloqueadas() {
     return alarmaBloqueo.isPuertasBloqueadas();
     }
+    public boolean todasLasPuertasCerradas() {
+    return puertas != null && puertas.estaTodasCerradas();
+}
+
 
 
     // Métodos para cinturón

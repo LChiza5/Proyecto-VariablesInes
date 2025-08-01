@@ -43,8 +43,9 @@ public class FrmCinturones extends javax.swing.JFrame {
         setBackground(new java.awt.Color(51, 0, 153));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnPasajero.setBackground(new java.awt.Color(0, 0, 0));
+        btnPasajero.setBackground(new java.awt.Color(102, 0, 0));
         btnPasajero.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        btnPasajero.setForeground(new java.awt.Color(255, 255, 255));
         btnPasajero.setText("Pasajero");
         btnPasajero.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
         btnPasajero.addActionListener(new java.awt.event.ActionListener() {
@@ -52,10 +53,11 @@ public class FrmCinturones extends javax.swing.JFrame {
                 btnPasajeroActionPerformed(evt);
             }
         });
-        getContentPane().add(btnPasajero, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 160, 110, 80));
+        getContentPane().add(btnPasajero, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 160, 140, 80));
 
-        btnPiloto.setBackground(new java.awt.Color(0, 0, 0));
+        btnPiloto.setBackground(new java.awt.Color(102, 0, 0));
         btnPiloto.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        btnPiloto.setForeground(new java.awt.Color(255, 255, 255));
         btnPiloto.setText("Piloto");
         btnPiloto.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
         btnPiloto.addActionListener(new java.awt.event.ActionListener() {
@@ -63,7 +65,7 @@ public class FrmCinturones extends javax.swing.JFrame {
                 btnPilotoActionPerformed(evt);
             }
         });
-        getContentPane().add(btnPiloto, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, 110, 80));
+        getContentPane().add(btnPiloto, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, 140, 80));
 
         btnVolver.setBackground(new java.awt.Color(0, 0, 0));
         btnVolver.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
@@ -84,14 +86,16 @@ public class FrmCinturones extends javax.swing.JFrame {
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, 230, 40));
 
         jLabel3.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Piloto");
         jLabel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, 60, 20));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 50, 20));
 
         jLabel4.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Pasajeros");
         jLabel4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 130, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 130, 80, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/fondoAzul.png"))); // NOI18N
         jLabel1.setText("jLabel1");
@@ -102,10 +106,10 @@ public class FrmCinturones extends javax.swing.JFrame {
     
     private void sincronizarEstado() {
         btnPiloto.setSelected(control.isCinturonPiloto());
-        btnPiloto.setText(control.isCinturonPiloto() ? "Piloto: Abrochado" : "Piloto: No abrochado");
+        btnPiloto.setText(control.isCinturonPiloto() ? "Abrochado" : "No abrochado");
 
         btnPasajero.setSelected(control.isCinturonPasajero());
-        btnPasajero.setText(control.isCinturonPasajero() ? "Pasajero: Abrochado" : "Pasajero: No abrochado");
+        btnPasajero.setText(control.isCinturonPasajero() ? "Abrochado" : "No abrochado");
     }
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         this.dispose();
@@ -121,13 +125,13 @@ public class FrmCinturones extends javax.swing.JFrame {
     private void toggleCinturonPiloto() {
         boolean abrochado = btnPiloto.isSelected();
         control.setCinturonPiloto(abrochado);
-        btnPiloto.setText(abrochado ? "Piloto: Abrochado" : "Piloto: No abrochado");
+        btnPiloto.setText(abrochado ? "Abrochado" : "No abrochado");
     }
     
     private void toggleCinturonPasajero() {
         boolean abrochado = btnPasajero.isSelected();
         control.setCinturonPasajero(abrochado);
-        btnPasajero.setText(abrochado ? "Pasajero: Abrochado" : "Pasajero: No abrochado");
+        btnPasajero.setText(abrochado ? "Abrochado" : "No abrochado");
     }
     
     /**
