@@ -28,6 +28,7 @@ public class frmVolante extends javax.swing.JFrame {
     public frmVolante(Control control) {
         this.control = control;
         initComponents();
+        sliderVelocidad.setMaximum(220);
         configurarEventos();
     }
     
@@ -105,11 +106,11 @@ public class frmVolante extends javax.swing.JFrame {
 
         lblVelocidad.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblVelocidad.setText("0");
-        getContentPane().add(lblVelocidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 220, 20, 20));
+        getContentPane().add(lblVelocidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, 80, 60));
 
         lblKilometrajeTotal.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblKilometrajeTotal.setText("000000");
-        getContentPane().add(lblKilometrajeTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 240, -1, -1));
+        getContentPane().add(lblKilometrajeTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, -1, -1));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/lblKilometraje.png"))); // NOI18N
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 200, 200));
@@ -183,16 +184,19 @@ public class frmVolante extends javax.swing.JFrame {
         public void actionPerformed(ActionEvent e) {
             if (control.getEstadoEncendido() == EstadoEncendido.ENCENDIDO && control.getNivelEnergia() > 0) {
                 int velocidad = sliderVelocidad.getValue();
-                if (velocidad < 120) {
+                if (velocidad < 220) {
                     velocidad++;
                     sliderVelocidad.setValue(velocidad);
-                    lblVelocidad.setText("Velocidad: " + velocidad + " km/h");
+                    lblVelocidad.setText(String.format("%d km/h", velocidad));
+
                     control.consumirEnergia(0.3);
                     control.actualizarKilometraje(0.05, velocidad, velocidad * 40);
+
+                    int distancia = (int) control.getDistanciaRecorrida();
+                    lblKilometrajeTotal.setText(String.format("%05d km", distancia));
                 }
-                mensajeMostrado[0] = false; // Reiniciar para próximo ciclo
             } else {
-                if (!mensajeMostrado[0]) {  // Solo mostrar mensaje una vez
+                if (!mensajeMostrado[0]) {
                     JOptionPane.showMessageDialog(null, "Motor apagado o sin energía.");
                     mensajeMostrado[0] = true;
                 }
@@ -208,9 +212,11 @@ public class frmVolante extends javax.swing.JFrame {
                 if (velocidad > 0) {
                     velocidad--;
                     sliderVelocidad.setValue(velocidad);
-                    lblVelocidad.setText("Velocidad: " + velocidad + " km/h");
-                    control.actualizarKilometraje(0.02, velocidad, velocidad * 30);
+                    lblVelocidad.setText(String.format("%d km/h", velocidad));
+                    // Ya no se actualiza el kilometraje al frenar
                 }
+                int distancia = (int) control.getDistanciaRecorrida();
+                lblKilometrajeTotal.setText(String.format("%05d km", distancia));
             } else {
                 timerFrenar.stop();
             }
