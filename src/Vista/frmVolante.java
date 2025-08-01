@@ -9,10 +9,13 @@ import Enums.EstadoEncendido;
 import Enums.TipoLuz;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
+import javax.swing.SwingUtilities;
 import javax.swing.Timer;
-import modelo.sistemaEnergia;
 
 /**
  *
@@ -24,6 +27,7 @@ public class frmVolante extends javax.swing.JFrame {
      private Timer timerFrenar;
      private Timer timerEnergia;
      private int energiaActual = 100;
+     private JRadioButton botonLuzSeleccionadoAnterior = null;
     
     
     /**
@@ -194,7 +198,7 @@ public class frmVolante extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     private void configurarEventos() {
-    final boolean[] mensajeMostrado = {false};
+     final boolean[] mensajeMostrado = {false};
 
     timerAcelerar = new Timer(100, new ActionListener() {
         public void actionPerformed(ActionEvent e) {
@@ -205,11 +209,21 @@ public class frmVolante extends javax.swing.JFrame {
                     sliderVelocidad.setValue(velocidad);
                     lblVelocidad.setText(String.format("%d km/h", velocidad));
 
-                    control.consumirEnergia(0.3);
+                    control.consumirEnergia(0.1);
                     control.actualizarKilometraje(0.05, velocidad, velocidad * 40);
 
                     int distancia = (int) control.getDistanciaRecorrida();
                     lblKilometrajeTotal.setText(String.format("%05d km", distancia));
+
+                    // 🔋 Actualizar energía
+                    int energiaActual = (int) control.getNivelEnergia();
+                    barraEnergia.setValue(energiaActual);
+                    lblEnergia.setText(energiaActual + "%");
+
+                    if (energiaActual <= 0) {
+                        JOptionPane.showMessageDialog(null, "¡Energía agotada!");
+                        timerAcelerar.stop();
+                    }
                 }
             } else {
                 if (!mensajeMostrado[0]) {
@@ -229,7 +243,6 @@ public class frmVolante extends javax.swing.JFrame {
                     velocidad--;
                     sliderVelocidad.setValue(velocidad);
                     lblVelocidad.setText(String.format("%d km/h", velocidad));
-                    // Ya no se actualiza el kilometraje al frenar
                 }
                 int distancia = (int) control.getDistanciaRecorrida();
                 lblKilometrajeTotal.setText(String.format("%05d km", distancia));
@@ -242,6 +255,7 @@ public class frmVolante extends javax.swing.JFrame {
     btnAcelerar.addMouseListener(new java.awt.event.MouseAdapter() {
         public void mousePressed(java.awt.event.MouseEvent evt) {
             if (control.getEstadoEncendido() == EstadoEncendido.ENCENDIDO && control.getNivelEnergia() > 0) {
+                mensajeMostrado[0] = false;
                 timerAcelerar.start();
             } else {
                 JOptionPane.showMessageDialog(null, "No se puede acelerar. El motor está apagado o sin energía.");
@@ -262,19 +276,21 @@ public class frmVolante extends javax.swing.JFrame {
             timerFrenar.stop();
         }
     });
-    
+
+    // Grupo de botones para luces
     ButtonGroup grupoLuces = new ButtonGroup();
     grupoLuces.add(rbtnApagadas);
     grupoLuces.add(rbtnBajas);
     grupoLuces.add(rbtnAltas);
-    
-  rbtnApagadas.addActionListener(new ActionListener() {
+
+    rbtnApagadas.addActionListener(new ActionListener() {
     public void actionPerformed(ActionEvent e) {
         if (control.getEstadoEncendido() == EstadoEncendido.ENCENDIDO) {
             control.cambiarLucesDelanteras(TipoLuz.APAGADA);
+            botonLuzSeleccionadoAnterior = rbtnApagadas;
         } else {
+            restaurarSeleccionAnterior();
             JOptionPane.showMessageDialog(null, "El vehículo está apagado. No se pueden encender las luces.");
-            grupoLuces.clearSelection(); // 🔹 Esto desmarca el botón
         }
     }
 });
@@ -283,9 +299,10 @@ rbtnBajas.addActionListener(new ActionListener() {
     public void actionPerformed(ActionEvent e) {
         if (control.getEstadoEncendido() == EstadoEncendido.ENCENDIDO) {
             control.cambiarLucesDelanteras(TipoLuz.BAJA);
+            botonLuzSeleccionadoAnterior = rbtnBajas;
         } else {
+            restaurarSeleccionAnterior();
             JOptionPane.showMessageDialog(null, "El vehículo está apagado. No se pueden encender las luces.");
-            grupoLuces.clearSelection(); // 🔹 Esto desmarca el botón
         }
     }
 });
@@ -294,17 +311,31 @@ rbtnAltas.addActionListener(new ActionListener() {
     public void actionPerformed(ActionEvent e) {
         if (control.getEstadoEncendido() == EstadoEncendido.ENCENDIDO) {
             control.cambiarLucesDelanteras(TipoLuz.ALTA);
+            botonLuzSeleccionadoAnterior = rbtnAltas;
         } else {
+            restaurarSeleccionAnterior();
             JOptionPane.showMessageDialog(null, "El vehículo está apagado. No se pueden encender las luces.");
-            grupoLuces.clearSelection(); // 🔹 Esto desmarca el botón
-            }
+        }
+    }
+});
+}
+private void restaurarSeleccionAnterior() {
+    SwingUtilities.invokeLater(() -> {
+        if (botonLuzSeleccionadoAnterior != null) {
+            botonLuzSeleccionadoAnterior.setSelected(true);
+        } else {
+            // Si no hay botón previo, limpiar selección
+            ButtonGroup grupoLuces = new ButtonGroup();
+            grupoLuces.add(rbtnApagadas);
+            grupoLuces.add(rbtnBajas);
+            grupoLuces.add(rbtnAltas);
+            grupoLuces.clearSelection();
         }
     });
 }
-    private void actualizarEstadoMotor() {
+
+private void actualizarEstadoMotor() {
     boolean estaEncendido = control.getEstadoEncendido() == EstadoEncendido.ENCENDIDO;
-    btnEncender.setSelected(estaEncendido);
-    btnEncender.setText(estaEncendido ? "Apagar" : "Encender");
     btnAcelerar.setEnabled(estaEncendido);
 }
 
