@@ -42,7 +42,6 @@ public class frmVolante extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
-        progresoEnergia = new javax.swing.JProgressBar();
         sliderVelocidad = new javax.swing.JSlider();
         jLabel3 = new javax.swing.JLabel();
         btnAcelerar = new javax.swing.JButton();
@@ -57,6 +56,7 @@ public class frmVolante extends javax.swing.JFrame {
         rbtnAltas = new javax.swing.JRadioButton();
         jLabel8 = new javax.swing.JLabel();
         btnEncender = new javax.swing.JToggleButton();
+        jProgressBar1 = new javax.swing.JProgressBar();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -69,14 +69,6 @@ public class frmVolante extends javax.swing.JFrame {
         jLabel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel2.setOpaque(true);
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 20, 100, 40));
-
-        progresoEnergia.setBackground(new java.awt.Color(255, 255, 255));
-        progresoEnergia.setForeground(new java.awt.Color(255, 255, 255));
-        progresoEnergia.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        progresoEnergia.setBorderPainted(false);
-        progresoEnergia.setName(""); // NOI18N
-        progresoEnergia.setRequestFocusEnabled(false);
-        getContentPane().add(progresoEnergia, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 90, 140, 30));
         getContentPane().add(sliderVelocidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, 200, 30));
 
         jLabel3.setBackground(new java.awt.Color(0, 51, 102));
@@ -93,7 +85,7 @@ public class frmVolante extends javax.swing.JFrame {
                 btnAcelerarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAcelerar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 340, 110, 80));
+        getContentPane().add(btnAcelerar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 350, 110, 80));
 
         btnFrenar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/btnFrenar.png"))); // NOI18N
         btnFrenar.setText("frenar");
@@ -171,6 +163,9 @@ public class frmVolante extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnEncender, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 260, 140, 30));
+
+        jProgressBar1.setBackground(new java.awt.Color(255, 255, 255));
+        getContentPane().add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 80, -1, 40));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/frmVolante.jpg"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 880, 500));
@@ -314,9 +309,9 @@ public class frmVolante extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JLabel lblKilometrajeTotal;
     private javax.swing.JLabel lblVelocidad;
-    private javax.swing.JProgressBar progresoEnergia;
     private javax.swing.JRadioButton rbtnAltas;
     private javax.swing.JRadioButton rbtnApagadas;
     private javax.swing.JRadioButton rbtnBjas;
