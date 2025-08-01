@@ -235,6 +235,10 @@ public class Control{
     public void setObstaculoDetras(boolean estado) {
         sensores.setObstaculoDetras(estado);
     }
+    
+    public sistemaSensores getSensores() {
+    return sensores;
+    }
 
     // Métodos para kilometraje
     public void actualizarKilometraje(double distancia, double velocidad, int rpm) {

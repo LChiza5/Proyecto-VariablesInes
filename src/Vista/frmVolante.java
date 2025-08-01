@@ -65,8 +65,7 @@ public class frmVolante extends javax.swing.JFrame {
         lblVelocidad = new javax.swing.JLabel();
         lblKilometrajeTotal = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jLabel7 = new javax.swing.JLabel();
+        lblSensores = new javax.swing.JLabel();
         rbtnApagadas = new javax.swing.JRadioButton();
         rbtnBajas = new javax.swing.JRadioButton();
         rbtnAltas = new javax.swing.JRadioButton();
@@ -74,6 +73,12 @@ public class frmVolante extends javax.swing.JFrame {
         btnEncender = new javax.swing.JToggleButton();
         barraEnergia = new javax.swing.JProgressBar();
         lblEnergia = new javax.swing.JLabel();
+        comboDireccion = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        comboFrenoMano = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        chkObstaculo = new javax.swing.JCheckBox();
+        chkLucesEmergencia = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -85,7 +90,7 @@ public class frmVolante extends javax.swing.JFrame {
         jLabel2.setText("ENERGÍA");
         jLabel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel2.setOpaque(true);
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 20, 100, 40));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 30, 100, 40));
 
         sliderVelocidad.setEnabled(false);
         getContentPane().add(sliderVelocidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, 200, 30));
@@ -126,21 +131,13 @@ public class frmVolante extends javax.swing.JFrame {
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/lblKilometraje.png"))); // NOI18N
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 200, 200));
 
-        jCheckBox1.setBackground(new java.awt.Color(0, 51, 102));
-        jCheckBox1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jCheckBox1.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox1.setText("ACTIVADO");
-        jCheckBox1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jCheckBox1.setOpaque(true);
-        getContentPane().add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 220, 130, 40));
-
-        jLabel7.setBackground(new java.awt.Color(0, 51, 102));
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("SENSORES:");
-        jLabel7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jLabel7.setOpaque(true);
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 220, 100, 40));
+        lblSensores.setBackground(new java.awt.Color(0, 51, 102));
+        lblSensores.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblSensores.setForeground(new java.awt.Color(255, 255, 255));
+        lblSensores.setText("DIRECCION:");
+        lblSensores.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        lblSensores.setOpaque(true);
+        getContentPane().add(lblSensores, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 220, 100, 40));
 
         rbtnApagadas.setBackground(new java.awt.Color(0, 51, 102));
         rbtnApagadas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -184,7 +181,7 @@ public class frmVolante extends javax.swing.JFrame {
         getContentPane().add(btnEncender, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 260, 140, 30));
 
         barraEnergia.setBackground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(barraEnergia, new org.netbeans.lib.awtextra.AbsoluteConstraints(626, 120, 140, 40));
+        getContentPane().add(barraEnergia, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 140, 150, 40));
 
         lblEnergia.setBackground(new java.awt.Color(0, 51, 102));
         lblEnergia.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -192,10 +189,60 @@ public class frmVolante extends javax.swing.JFrame {
         lblEnergia.setText("100%");
         lblEnergia.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         lblEnergia.setOpaque(true);
-        getContentPane().add(lblEnergia, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 80, 50, 30));
+        getContentPane().add(lblEnergia, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 90, 50, 30));
+
+        comboDireccion.setBackground(new java.awt.Color(51, 51, 51));
+        comboDireccion.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        comboDireccion.setForeground(new java.awt.Color(255, 255, 255));
+        comboDireccion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NEUTRO", "ADELANTE", "REVERSA", " ", " " }));
+        comboDireccion.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 51, 102), new java.awt.Color(0, 0, 153), new java.awt.Color(0, 51, 102), new java.awt.Color(0, 51, 102)));
+        getContentPane().add(comboDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 220, 120, 40));
+
+        jLabel5.setBackground(new java.awt.Color(0, 51, 102));
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("FRENO DE MANO:");
+        jLabel5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel5.setOpaque(true);
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 270, 150, 40));
+
+        comboFrenoMano.setBackground(new java.awt.Color(51, 51, 51));
+        comboFrenoMano.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        comboFrenoMano.setForeground(new java.awt.Color(255, 255, 255));
+        comboFrenoMano.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DESACTIVADO", "ACTIVADO", " " }));
+        comboFrenoMano.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 51, 102), new java.awt.Color(0, 51, 102), new java.awt.Color(0, 51, 102), new java.awt.Color(0, 51, 102)));
+        getContentPane().add(comboFrenoMano, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 270, -1, 40));
+
+        jLabel6.setBackground(new java.awt.Color(0, 51, 102));
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("OBSTACULO:");
+        jLabel6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel6.setOpaque(true);
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 320, -1, 40));
+
+        chkObstaculo.setBackground(new java.awt.Color(51, 51, 51));
+        chkObstaculo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        chkObstaculo.setForeground(new java.awt.Color(255, 255, 255));
+        chkObstaculo.setText("DETECTADO");
+        chkObstaculo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        chkObstaculo.setOpaque(true);
+        getContentPane().add(chkObstaculo, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 320, -1, 40));
+
+        chkLucesEmergencia.setBackground(new java.awt.Color(0, 51, 102));
+        chkLucesEmergencia.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        chkLucesEmergencia.setForeground(new java.awt.Color(255, 255, 255));
+        chkLucesEmergencia.setText("Luces de Emergencia");
+        chkLucesEmergencia.setOpaque(true);
+        chkLucesEmergencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkLucesEmergenciaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(chkLucesEmergencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 150, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/frmVolante.jpg"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 880, 500));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 990, 500));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -352,7 +399,7 @@ private void restaurarSeleccionAnterior() {
 private void actualizarEstadoMotor() {
     boolean estaEncendido = control.getEstadoEncendido() == EstadoEncendido.ENCENDIDO;
     btnAcelerar.setEnabled(estaEncendido);
-}
+    }
 
     private void btnAcelerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcelerarActionPerformed
         // TODO add your handling code here:
@@ -374,6 +421,14 @@ private void actualizarEstadoMotor() {
         btnAcelerar.setEnabled(false);
     }
     }//GEN-LAST:event_btnEncenderActionPerformed
+
+    private void chkLucesEmergenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkLucesEmergenciaActionPerformed
+       if (chkLucesEmergencia.isSelected()) {
+        JOptionPane.showMessageDialog(this, "¡Luces de emergencia activadas!!");
+    } else {
+        JOptionPane.showMessageDialog(this, "Luces de emergencia desactivadas.");
+    }
+    }//GEN-LAST:event_chkLucesEmergenciaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -415,15 +470,20 @@ private void actualizarEstadoMotor() {
     private javax.swing.JButton btnAcelerar;
     private javax.swing.JToggleButton btnEncender;
     private javax.swing.JButton btnFrenar;
-    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox chkLucesEmergencia;
+    private javax.swing.JCheckBox chkObstaculo;
+    private javax.swing.JComboBox<String> comboDireccion;
+    private javax.swing.JComboBox<String> comboFrenoMano;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel lblEnergia;
     private javax.swing.JLabel lblKilometrajeTotal;
+    private javax.swing.JLabel lblSensores;
     private javax.swing.JLabel lblVelocidad;
     private javax.swing.JRadioButton rbtnAltas;
     private javax.swing.JRadioButton rbtnApagadas;
