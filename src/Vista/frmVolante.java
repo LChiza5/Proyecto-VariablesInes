@@ -52,7 +52,7 @@ public class frmVolante extends javax.swing.JFrame {
         jCheckBox1 = new javax.swing.JCheckBox();
         jLabel7 = new javax.swing.JLabel();
         rbtnApagadas = new javax.swing.JRadioButton();
-        rbtnBjas = new javax.swing.JRadioButton();
+        rbtnBajas = new javax.swing.JRadioButton();
         rbtnAltas = new javax.swing.JRadioButton();
         jLabel8 = new javax.swing.JLabel();
         btnEncender = new javax.swing.JToggleButton();
@@ -130,12 +130,12 @@ public class frmVolante extends javax.swing.JFrame {
         rbtnApagadas.setOpaque(true);
         getContentPane().add(rbtnApagadas, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 130, -1, -1));
 
-        rbtnBjas.setBackground(new java.awt.Color(0, 51, 102));
-        rbtnBjas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        rbtnBjas.setForeground(new java.awt.Color(255, 255, 255));
-        rbtnBjas.setText("BAJAS");
-        rbtnBjas.setOpaque(true);
-        getContentPane().add(rbtnBjas, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 160, 90, -1));
+        rbtnBajas.setBackground(new java.awt.Color(0, 51, 102));
+        rbtnBajas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        rbtnBajas.setForeground(new java.awt.Color(255, 255, 255));
+        rbtnBajas.setText("BAJAS");
+        rbtnBajas.setOpaque(true);
+        getContentPane().add(rbtnBajas, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 160, 90, -1));
 
         rbtnAltas.setBackground(new java.awt.Color(0, 51, 102));
         rbtnAltas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -314,7 +314,7 @@ public class frmVolante extends javax.swing.JFrame {
     private javax.swing.JLabel lblVelocidad;
     private javax.swing.JRadioButton rbtnAltas;
     private javax.swing.JRadioButton rbtnApagadas;
-    private javax.swing.JRadioButton rbtnBjas;
+    private javax.swing.JRadioButton rbtnBajas;
     private javax.swing.JSlider sliderVelocidad;
     // End of variables declaration//GEN-END:variables
 }
