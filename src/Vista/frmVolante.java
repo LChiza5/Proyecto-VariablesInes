@@ -22,7 +22,9 @@ public class frmVolante extends javax.swing.JFrame {
      private Control control;
      private Timer timerAcelerar;
      private Timer timerFrenar;
-     
+     private Timer timerEnergia;
+     private int energiaActual = 100;
+    
     
     /**
      * Creates new form frmVolante
@@ -66,7 +68,8 @@ public class frmVolante extends javax.swing.JFrame {
         rbtnAltas = new javax.swing.JRadioButton();
         jLabel8 = new javax.swing.JLabel();
         btnEncender = new javax.swing.JToggleButton();
-        jProgressBar1 = new javax.swing.JProgressBar();
+        barraEnergia = new javax.swing.JProgressBar();
+        lblEnergia = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -123,7 +126,7 @@ public class frmVolante extends javax.swing.JFrame {
         jCheckBox1.setText("ACTIVADO");
         jCheckBox1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jCheckBox1.setOpaque(true);
-        getContentPane().add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 160, 130, 40));
+        getContentPane().add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 220, 130, 40));
 
         jLabel7.setBackground(new java.awt.Color(0, 51, 102));
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -131,7 +134,7 @@ public class frmVolante extends javax.swing.JFrame {
         jLabel7.setText("SENSORES:");
         jLabel7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel7.setOpaque(true);
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 160, 100, 40));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 220, 100, 40));
 
         rbtnApagadas.setBackground(new java.awt.Color(0, 51, 102));
         rbtnApagadas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -174,8 +177,16 @@ public class frmVolante extends javax.swing.JFrame {
         });
         getContentPane().add(btnEncender, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 260, 140, 30));
 
-        jProgressBar1.setBackground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 80, -1, 40));
+        barraEnergia.setBackground(new java.awt.Color(255, 255, 255));
+        getContentPane().add(barraEnergia, new org.netbeans.lib.awtextra.AbsoluteConstraints(626, 120, 140, 40));
+
+        lblEnergia.setBackground(new java.awt.Color(0, 51, 102));
+        lblEnergia.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblEnergia.setForeground(new java.awt.Color(255, 255, 255));
+        lblEnergia.setText("100%");
+        lblEnergia.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        lblEnergia.setOpaque(true);
+        getContentPane().add(lblEnergia, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 80, 50, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/frmVolante.jpg"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 880, 500));
@@ -354,6 +365,7 @@ rbtnAltas.addActionListener(new ActionListener() {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JProgressBar barraEnergia;
     private javax.swing.JButton btnAcelerar;
     private javax.swing.JToggleButton btnEncender;
     private javax.swing.JButton btnFrenar;
@@ -364,7 +376,7 @@ rbtnAltas.addActionListener(new ActionListener() {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JProgressBar jProgressBar1;
+    private javax.swing.JLabel lblEnergia;
     private javax.swing.JLabel lblKilometrajeTotal;
     private javax.swing.JLabel lblVelocidad;
     private javax.swing.JRadioButton rbtnAltas;
