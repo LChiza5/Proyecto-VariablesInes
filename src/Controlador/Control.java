@@ -43,7 +43,6 @@ public class Control{
     public Control(int cantidadPuertas, int cantidadCinturones) {
         this.alarmaBloqueo = new sistemaAlarmaBloqueo();
         this.puertas = new sistemaPuertas(cantidadPuertas, alarmaBloqueo);
-        this.cinturones = new sistemaCinturones(cantidadCinturones);
         this.sensores = new sistemaSensores();
         this.encendido = new sistemaEncendido(cinturones, puertas, sensores);
         this.iluminacion = new sistemaIluminacion(encendido, puertas);
@@ -104,16 +103,25 @@ public class Control{
 
 
     // Métodos para cinturón
-    public void abrocharCinturon() {
-        cinturones.abrocharCinturon();
+    
+    public void setCinturonPiloto(boolean estado) {
+    cinturones.setPilotoAbrochado(estado);
     }
 
-    public void desabrocharCinturon() {
-        cinturones.desabrocharCinturon();
+    public void setCinturonPasajero(boolean estado) {
+    cinturones.setPasajeroAbrochado(estado);
     }
 
-    public boolean estaCinturonAbrochado() {
-        return cinturones.estaAbrochado();
+    public boolean isCinturonPiloto() {
+    return cinturones.isPilotoAbrochado();
+    }
+
+    public boolean isCinturonPasajero() {
+    return cinturones.isPasajeroAbrochado();
+    }
+
+    public boolean sePuedeAcelerar() {
+    return cinturones.isPilotoAbrochado() && cinturones.isPasajeroAbrochado();
     }
 
     // Métodos para alarma y bloqueo

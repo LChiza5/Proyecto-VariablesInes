@@ -6,22 +6,20 @@
 package Vista;
 
 
-import modelo.sistemaCinturones;
+import Controlador.Control;
+
 
 /**
  *
- * @author LOLO
+ * @author ilope
  */
 public class FrmCinturones extends javax.swing.JFrame {
- sistemaCinturones sistema;
+ private Control control;
 
-    /** Creates new form FrmCinturones */
-    public FrmCinturones() {
+    public FrmCinturones(Control control) {
+        this.control = control;
         initComponents();
-       sistema = new sistemaCinturones(1);
-lblEstadoCinturon.setText("Estado: " + (sistema.estaAbrochado() ? "Abrochado" : "No Abrochado"));
-
-
+        sincronizarEstado();
     }
 
     /** This method is called from within the constructor to
@@ -33,112 +31,118 @@ lblEstadoCinturon.setText("Estado: " + (sistema.estaAbrochado() ? "Abrochado" : 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabelEstado = new javax.swing.JButton();
-        JLabelEstado = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        lblEstadoCinturon = new javax.swing.JLabel();
+        btnPasajero = new javax.swing.JToggleButton();
+        btnPiloto = new javax.swing.JToggleButton();
+        btnVolver = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(51, 0, 153));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabelEstado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/cinturon-de-seguridad-para-el-conductor (2).png"))); // NOI18N
-        jLabelEstado.setText("Abrochar");
-        jLabelEstado.setIconTextGap(7);
-        jLabelEstado.setMaximumSize(new java.awt.Dimension(100, 519));
-        jLabelEstado.setMinimumSize(new java.awt.Dimension(100, 519));
-        jLabelEstado.addActionListener(new java.awt.event.ActionListener() {
+        btnPasajero.setBackground(new java.awt.Color(0, 0, 0));
+        btnPasajero.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        btnPasajero.setText("Pasajero");
+        btnPasajero.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
+        btnPasajero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jLabelEstadoActionPerformed(evt);
+                btnPasajeroActionPerformed(evt);
             }
         });
-        getContentPane().add(jLabelEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, 130, 80));
+        getContentPane().add(btnPasajero, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 160, 110, 80));
 
-        JLabelEstado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/desabrochado.png"))); // NOI18N
-        JLabelEstado.setText("Desabrochar");
-        JLabelEstado.addActionListener(new java.awt.event.ActionListener() {
+        btnPiloto.setBackground(new java.awt.Color(0, 0, 0));
+        btnPiloto.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        btnPiloto.setText("Piloto");
+        btnPiloto.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
+        btnPiloto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JLabelEstadoActionPerformed(evt);
+                btnPilotoActionPerformed(evt);
             }
         });
-        getContentPane().add(JLabelEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 150, 150, 80));
+        getContentPane().add(btnPiloto, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, 110, 80));
 
-        jButton3.setText("Volver");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnVolver.setBackground(new java.awt.Color(0, 0, 0));
+        btnVolver.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        btnVolver.setForeground(new java.awt.Color(255, 255, 255));
+        btnVolver.setText("Volver");
+        btnVolver.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnVolverActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 480, -1, -1));
+        getContentPane().add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 340, 90, 50));
 
-        lblEstadoCinturon.setText("Estado");
-        getContentPane().add(lblEstadoCinturon, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 330, 40, 30));
+        jLabel2.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Cinturones de Seguridad");
+        jLabel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, 230, 40));
+
+        jLabel3.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jLabel3.setText("Piloto");
+        jLabel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, 60, 20));
+
+        jLabel4.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jLabel4.setText("Pasajeros");
+        jLabel4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 130, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/fondoAzul.png"))); // NOI18N
         jLabel1.setText("jLabel1");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 460, 420));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+    private void sincronizarEstado() {
+        btnPiloto.setSelected(control.isCinturonPiloto());
+        btnPiloto.setText(control.isCinturonPiloto() ? "Piloto: Abrochado" : "Piloto: No abrochado");
 
-    private void jLabelEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jLabelEstadoActionPerformed
-        jLabelEstado.setText("Estado: Abrochado");
-        sistema.abrocharCinturon();
-lblEstadoCinturon.setText("Estado: Abrochado");
-    }//GEN-LAST:event_jLabelEstadoActionPerformed
+        btnPasajero.setSelected(control.isCinturonPasajero());
+        btnPasajero.setText(control.isCinturonPasajero() ? "Pasajero: Abrochado" : "Pasajero: No abrochado");
+    }
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnVolverActionPerformed
 
-    private void JLabelEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JLabelEstadoActionPerformed
-       jLabelEstado.setText("Estado: No Abrochado");
-       sistema.desabrocharCinturon();
-lblEstadoCinturon.setText("Estado: No Abrochado");
-    }//GEN-LAST:event_JLabelEstadoActionPerformed
+    private void btnPilotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPilotoActionPerformed
+        toggleCinturonPiloto();
+    }//GEN-LAST:event_btnPilotoActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-       this.dispose();
-    }//GEN-LAST:event_jButton3ActionPerformed
-
+    private void btnPasajeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPasajeroActionPerformed
+        toggleCinturonPasajero();
+    }//GEN-LAST:event_btnPasajeroActionPerformed
+    private void toggleCinturonPiloto() {
+        boolean abrochado = btnPiloto.isSelected();
+        control.setCinturonPiloto(abrochado);
+        btnPiloto.setText(abrochado ? "Piloto: Abrochado" : "Piloto: No abrochado");
+    }
+    
+    private void toggleCinturonPasajero() {
+        boolean abrochado = btnPasajero.isSelected();
+        control.setCinturonPasajero(abrochado);
+        btnPasajero.setText(abrochado ? "Pasajero: Abrochado" : "Pasajero: No abrochado");
+    }
+    
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmCinturones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmCinturones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmCinturones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmCinturones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FrmCinturones().setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton JLabelEstado;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JToggleButton btnPasajero;
+    private javax.swing.JToggleButton btnPiloto;
+    private javax.swing.JButton btnVolver;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JButton jLabelEstado;
-    private javax.swing.JLabel lblEstadoCinturon;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
 
 }

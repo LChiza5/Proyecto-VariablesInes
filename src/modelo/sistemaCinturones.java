@@ -10,28 +10,42 @@ import Enums.EstadoCinturon;
  *
  * @author LOLO
  */
+
 public class sistemaCinturones {
-    private EstadoCinturon cinturón;  
+    private EstadoCinturon cinturonPiloto;
+    private EstadoCinturon cinturonPasajero;
 
-    public sistemaCinturones(int cantidadCinturones) {
-        this.cinturón = EstadoCinturon.NO_ABROCHADO;
+    public sistemaCinturones() {
+        this.cinturonPiloto = EstadoCinturon.NO_ABROCHADO;
+        this.cinturonPasajero = EstadoCinturon.NO_ABROCHADO;
     }
 
-    public void abrocharCinturon() {
-        this.cinturón = EstadoCinturon.ABROCHADO;
+    public void setPilotoAbrochado(boolean abrochado) {
+        this.cinturonPiloto = abrochado ? EstadoCinturon.ABROCHADO : EstadoCinturon.NO_ABROCHADO;
     }
 
-    public void desabrocharCinturon() {
-        this.cinturón = EstadoCinturon.NO_ABROCHADO;
+    public void setPasajeroAbrochado(boolean abrochado) {
+        this.cinturonPasajero = abrochado ? EstadoCinturon.ABROCHADO : EstadoCinturon.NO_ABROCHADO;
     }
 
-    public EstadoCinturon getEstadoCinturon() {
-        return cinturón;
+    public boolean isPilotoAbrochado() {
+        return cinturonPiloto == EstadoCinturon.ABROCHADO;
     }
 
-    public boolean estaAbrochado() {
-        return cinturón == EstadoCinturon.ABROCHADO;
+    public boolean isPasajeroAbrochado() {
+        return cinturonPasajero == EstadoCinturon.ABROCHADO;
+    }
+
+    public EstadoCinturon getEstadoPiloto() {
+        return cinturonPiloto;
+    }
+
+    public EstadoCinturon getEstadoPasajero() {
+        return cinturonPasajero;
+    }
+
+    public boolean ambosAbrochados() {
+        return isPilotoAbrochado() && isPasajeroAbrochado();
     }
 }
-
 

@@ -44,10 +44,10 @@ public class sistemaEncendido {
         return false;
         }
 
-        if (!cinturones.estaAbrochado()) { 
-            System.out.println("¡Advertencia! Cinturón del piloto no está abrochado.");
-            // En GUI: JOptionPane.showMessageDialog(null, "¡Advertencia! Cinturón no abrochado.");
+        if (!cinturones.isPilotoAbrochado()) {
+         System.out.println("¡Advertencia! Cinturón del piloto no está abrochado.");
         }
+
 
         for (int i = 0; i <  puertas.getCantidadPuertas(); i++) {
             if (puertas.getEstadoPuerta(i) == EstadoPuerta.ABIERTA) {

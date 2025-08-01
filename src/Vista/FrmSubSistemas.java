@@ -68,6 +68,11 @@ public class FrmSubSistemas extends javax.swing.JFrame {
         btnCinturones.setForeground(new java.awt.Color(255, 255, 255));
         btnCinturones.setText("Cinturones");
         btnCinturones.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
+        btnCinturones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCinturonesActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnCinturones, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 180, 190, 70));
 
         btnAlarma.setBackground(new java.awt.Color(0, 0, 0));
@@ -144,6 +149,11 @@ public class FrmSubSistemas extends javax.swing.JFrame {
         FrmRadio frame = new FrmRadio(control);
         frame.setVisible(true);
     }//GEN-LAST:event_btnRadioActionPerformed
+
+    private void btnCinturonesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCinturonesActionPerformed
+        FrmCinturones frame = new FrmCinturones(control);
+        frame.setVisible(true);
+    }//GEN-LAST:event_btnCinturonesActionPerformed
 
     /**
      * @param args the command line arguments
