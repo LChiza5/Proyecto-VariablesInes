@@ -4,25 +4,24 @@
  */
 package Vista;
 
-import modelo.sistemaEncendido;
-import modelo.sistemaRadio;
+import Controlador.Control;
+import Enums.EstadoEncendido;
+import Enums.ModoRadio;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author LOLO
  */
 public class FrmRadio extends javax.swing.JFrame {
-private sistemaRadio radio;
-private sistemaEncendido sistemaEncendido; // si es necesario
-    /**
-     * Creates new form FrmRadio
-     */
-    public FrmRadio() {
+
+    private final Control control;
+
+    public FrmRadio(Control control) {
+        this.control = control;
         initComponents();
-            sistemaEncendido = new sistemaEncendido();
-        radio = new sistemaRadio(sistemaEncendido);
+        verificarEstadoAuto();
         actualizarEstado();
-    }
     }
 
     /**
@@ -34,129 +33,166 @@ private sistemaEncendido sistemaEncendido; // si es necesario
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnEncender = new javax.swing.JButton();
-        btnApagar = new javax.swing.JButton();
-        btnAM = new javax.swing.JButton();
-        btnFM = new javax.swing.JButton();
-        btnBluetooth = new javax.swing.JButton();
-        btnsubir = new javax.swing.JButton();
-        btnBajar = new javax.swing.JButton();
-        lblEstadoRadio = new javax.swing.JLabel();
-        lblModoActual = new javax.swing.JLabel();
-        lblFrecuencia = new javax.swing.JLabel();
+        cmbModo = new javax.swing.JComboBox<>();
+        sldFrecuencia = new javax.swing.JSlider();
+        btnEncender = new javax.swing.JToggleButton();
+        lblEstado1 = new javax.swing.JLabel();
+        btnVolver = new javax.swing.JButton();
+        lblEstado = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        lblEstado2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnEncender.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/sensor-encendido.png"))); // NOI18N
-        btnEncender.setText("Encender ");
+        cmbModo.setBackground(new java.awt.Color(0, 0, 0));
+        cmbModo.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        cmbModo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AM", "FM", "BLUETOOTH" }));
+        cmbModo.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
+        cmbModo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbModoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cmbModo, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 180, 90, 70));
+
+        sldFrecuencia.setBackground(new java.awt.Color(255, 255, 255));
+        sldFrecuencia.setMaximum(108);
+        sldFrecuencia.setMinimum(80);
+        getContentPane().add(sldFrecuencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 350, -1, -1));
+
+        btnEncender.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/btnencender.png"))); // NOI18N
+        btnEncender.setText("jToggleButton1");
         btnEncender.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEncenderActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEncender, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 70, 120, 50));
+        getContentPane().add(btnEncender, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 180, 90, 80));
 
-        btnApagar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/sensor-encendido (1).png"))); // NOI18N
-        btnApagar.setText("Apagar");
-        getContentPane().add(btnApagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 70, 130, 50));
+        lblEstado1.setBackground(new java.awt.Color(0, 0, 0));
+        lblEstado1.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        lblEstado1.setForeground(new java.awt.Color(255, 255, 255));
+        lblEstado1.setText("Ajustar Frecuencia");
+        lblEstado1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
+        getContentPane().add(lblEstado1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 380, 140, 40));
 
-        btnAM.setText("Modo AM");
-        getContentPane().add(btnAM, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, 120, 50));
-
-        btnFM.setText("Modo FM");
-        getContentPane().add(btnFM, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 180, 110, 50));
-
-        btnBluetooth.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/circulo-bluetooth.png"))); // NOI18N
-        btnBluetooth.setText("Modo Bluetooth");
-        btnBluetooth.addActionListener(new java.awt.event.ActionListener() {
+        btnVolver.setBackground(new java.awt.Color(0, 0, 0));
+        btnVolver.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        btnVolver.setForeground(new java.awt.Color(255, 255, 255));
+        btnVolver.setText("Volver");
+        btnVolver.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBluetoothActionPerformed(evt);
+                btnVolverActionPerformed(evt);
             }
         });
-        getContentPane().add(btnBluetooth, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 180, 160, 50));
+        getContentPane().add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 470, 90, 40));
 
-        btnsubir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/volumen.png"))); // NOI18N
-        btnsubir.setText("Subir Frecuencia");
-        getContentPane().add(btnsubir, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 310, 160, 50));
+        lblEstado.setBackground(new java.awt.Color(0, 0, 0));
+        lblEstado.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        lblEstado.setForeground(new java.awt.Color(255, 255, 255));
+        lblEstado.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
+        getContentPane().add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 280, 280, 50));
 
-        btnBajar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/bajar-volumen.png"))); // NOI18N
-        btnBajar.setText("Bajar Frecuencia");
-        getContentPane().add(btnBajar, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 310, 170, 50));
+        jLabel2.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel2.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("        Bienvenido al Radio");
+        jLabel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 5, true));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 360, 50));
 
-        lblEstadoRadio.setText("Estado");
-        getContentPane().add(lblEstadoRadio, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 300, 40, 40));
-
-        lblModoActual.setText("jLabel2");
-        getContentPane().add(lblModoActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 370, -1, -1));
-
-        lblFrecuencia.setText("jLabel2");
-        getContentPane().add(lblFrecuencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 420, -1, -1));
+        lblEstado2.setBackground(new java.awt.Color(0, 0, 0));
+        lblEstado2.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        lblEstado2.setForeground(new java.awt.Color(255, 255, 255));
+        lblEstado2.setText("Seleccionar modo -----  Apagar/Encender");
+        lblEstado2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
+        getContentPane().add(lblEstado2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 300, 50));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/fondoAzul.png"))); // NOI18N
-        jLabel1.setText("jLabel1");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -130, -1, 940));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 520));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnVolverActionPerformed
+
     private void btnEncenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncenderActionPerformed
-       radio.encender();
-actualizarEstado(); // método que actualiza los labels
+        boolean encendido = control.getEstadoEncendido() == EstadoEncendido.ENCENDIDO;
+        if (!encendido) {
+            JOptionPane.showMessageDialog(this, "El auto está apagado. Enciéndelo para usar la radio.");
+            btnEncender.setSelected(false);
+            return;
+        }
+
+        if (btnEncender.isSelected()) {
+            control.encenderRadio();
+            btnEncender.setText("Apagar Radio");
+        } else {
+            control.apagarRadio();
+            btnEncender.setText("Encender Radio");
+        }
+
+        actualizarEstado();
     }//GEN-LAST:event_btnEncenderActionPerformed
 
-    private void btnBluetoothActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBluetoothActionPerformed
-       radio.cambiarModo(ModoRadio.BLUETOOTH);
-actualizarEstado();
-    }//GEN-LAST:event_btnBluetoothActionPerformed
+    private void cmbModoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbModoActionPerformed
+        if (btnEncender.isSelected()) {
+            String modoSeleccionado = (String) cmbModo.getSelectedItem();
+            control.cambiarModoRadio(ModoRadio.valueOf(modoSeleccionado));
+            actualizarEtiqueta();
+        }
 
+    }//GEN-LAST:event_cmbModoActionPerformed
+     private void sldFrecuenciaStateChanged(javax.swing.event.ChangeEvent evt) {
+        if (btnEncender.isSelected()) {
+            double frecuencia = sldFrecuencia.getValue();
+            control.sintonizarRadio(frecuencia);
+            actualizarEtiqueta();
+        }
+    }
+
+    private void actualizarEtiqueta() {
+        String modo = cmbModo.getSelectedItem().toString();
+        double frecuencia = sldFrecuencia.getValue();
+        lblEstado.setText("Modo: " + modo + " | Frecuencia: " + frecuencia + " MHz");
+    }
+
+    private void actualizarEstado() {
+        boolean radioEncendida = btnEncender.isSelected();
+        cmbModo.setEnabled(radioEncendida);
+        sldFrecuencia.setEnabled(radioEncendida);
+        if (!radioEncendida) {
+            lblEstado.setText("Modo: -- | Frecuencia: --");
+        }
+    }
+
+    private void verificarEstadoAuto() {
+        boolean encendido = control.getEstadoEncendido() == EstadoEncendido.ENCENDIDO;
+        if (!encendido) {
+            btnEncender.setEnabled(false);
+            cmbModo.setEnabled(false);
+            sldFrecuencia.setEnabled(false);
+            JOptionPane.showMessageDialog(this, "El auto está apagado. Enciéndelo para usar la radio.");
+        }
+    }
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmRadio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmRadio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmRadio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmRadio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FrmRadio().setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAM;
-    private javax.swing.JButton btnApagar;
-    private javax.swing.JButton btnBajar;
-    private javax.swing.JButton btnBluetooth;
-    private javax.swing.JButton btnEncender;
-    private javax.swing.JButton btnFM;
-    private javax.swing.JButton btnsubir;
+    private javax.swing.JToggleButton btnEncender;
+    private javax.swing.JButton btnVolver;
+    private javax.swing.JComboBox<String> cmbModo;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel lblEstadoRadio;
-    private javax.swing.JLabel lblFrecuencia;
-    private javax.swing.JLabel lblModoActual;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel lblEstado;
+    private javax.swing.JLabel lblEstado1;
+    private javax.swing.JLabel lblEstado2;
+    private javax.swing.JSlider sldFrecuencia;
     // End of variables declaration//GEN-END:variables
 }

@@ -32,6 +32,14 @@ public class frmVolante extends javax.swing.JFrame {
         initComponents();
         sliderVelocidad.setMaximum(220);
         configurarEventos();
+
+        ButtonGroup grupoLuces = new ButtonGroup();
+        grupoLuces.add(rbtnApagadas);
+        grupoLuces.add(rbtnBajas);
+        grupoLuces.add(rbtnAltas);
+        actualizarEstadoMotor();
+
+
     }
     
     /**
@@ -282,6 +290,13 @@ rbtnAltas.addActionListener(new ActionListener() {
         }
     });
 }
+    private void actualizarEstadoMotor() {
+    boolean estaEncendido = control.getEstadoEncendido() == EstadoEncendido.ENCENDIDO;
+    btnEncender.setSelected(estaEncendido);
+    btnEncender.setText(estaEncendido ? "Apagar" : "Encender");
+    btnAcelerar.setEnabled(estaEncendido);
+}
+
     private void btnAcelerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcelerarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAcelerarActionPerformed

@@ -87,6 +87,11 @@ public class FrmSubSistemas extends javax.swing.JFrame {
         btnRadio.setForeground(new java.awt.Color(255, 255, 255));
         btnRadio.setText("Radio");
         btnRadio.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
+        btnRadio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRadioActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnRadio, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 320, 180, 70));
 
         btnClimatizacion.setBackground(new java.awt.Color(0, 0, 0));
@@ -134,6 +139,11 @@ public class FrmSubSistemas extends javax.swing.JFrame {
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
+
+    private void btnRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRadioActionPerformed
+        FrmRadio frame = new FrmRadio(control);
+        frame.setVisible(true);
+    }//GEN-LAST:event_btnRadioActionPerformed
 
     /**
      * @param args the command line arguments
