@@ -6,8 +6,10 @@ package Vista;
 
 import Controlador.Control;
 import Enums.EstadoEncendido;
+import Enums.TipoLuz;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import modelo.sistemaEnergia;
@@ -30,6 +32,10 @@ public class frmVolante extends javax.swing.JFrame {
         initComponents();
         sliderVelocidad.setMaximum(220);
         configurarEventos();
+        ButtonGroup grupoLuces = new ButtonGroup();
+        grupoLuces.add(rbtnApagadas);
+        grupoLuces.add(rbtnBajas);
+        grupoLuces.add(rbtnAltas);
     }
     
     /**
@@ -59,7 +65,7 @@ public class frmVolante extends javax.swing.JFrame {
         jProgressBar1 = new javax.swing.JProgressBar();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setBackground(new java.awt.Color(0, 51, 102));
@@ -173,7 +179,7 @@ public class frmVolante extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     private void configurarEventos() {
-   final boolean[] mensajeMostrado = {false};
+    final boolean[] mensajeMostrado = {false};
 
     timerAcelerar = new Timer(100, new ActionListener() {
         public void actionPerformed(ActionEvent e) {
@@ -239,6 +245,39 @@ public class frmVolante extends javax.swing.JFrame {
 
         public void mouseReleased(java.awt.event.MouseEvent evt) {
             timerFrenar.stop();
+        }
+    });
+    
+  rbtnApagadas.addActionListener(new ActionListener() {
+    public void actionPerformed(ActionEvent e) {
+        if (control.getEstadoEncendido() == EstadoEncendido.ENCENDIDO) {
+            control.cambiarLucesDelanteras(TipoLuz.APAGADA);
+        } else {
+            JOptionPane.showMessageDialog(null, "El vehículo está apagado. No se pueden encender las luces.");
+            rbtnApagadas.setSelected(false);
+        }
+    }
+});
+
+rbtnBajas.addActionListener(new ActionListener() {
+    public void actionPerformed(ActionEvent e) {
+        if (control.getEstadoEncendido() == EstadoEncendido.ENCENDIDO) {
+            control.cambiarLucesDelanteras(TipoLuz.BAJA);
+        } else {
+            JOptionPane.showMessageDialog(null, "El vehículo está apagado. No se pueden encender las luces.");
+            rbtnBajas.setSelected(false);
+        }
+    }
+});
+
+rbtnAltas.addActionListener(new ActionListener() {
+    public void actionPerformed(ActionEvent e) {
+        if (control.getEstadoEncendido() == EstadoEncendido.ENCENDIDO) {
+            control.cambiarLucesDelanteras(TipoLuz.ALTA);
+        } else {
+            JOptionPane.showMessageDialog(null, "El vehículo está apagado. No se pueden encender las luces.");
+            rbtnAltas.setSelected(false);
+            }
         }
     });
 }
