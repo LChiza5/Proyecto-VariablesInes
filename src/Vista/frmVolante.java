@@ -65,7 +65,7 @@ public class frmVolante extends javax.swing.JFrame {
         lblVelocidad = new javax.swing.JLabel();
         lblKilometrajeTotal = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        lblSensores = new javax.swing.JLabel();
+        lblMarcha = new javax.swing.JLabel();
         rbtnApagadas = new javax.swing.JRadioButton();
         rbtnBajas = new javax.swing.JRadioButton();
         rbtnAltas = new javax.swing.JRadioButton();
@@ -73,7 +73,7 @@ public class frmVolante extends javax.swing.JFrame {
         btnEncender = new javax.swing.JToggleButton();
         barraEnergia = new javax.swing.JProgressBar();
         lblEnergia = new javax.swing.JLabel();
-        comboDireccion = new javax.swing.JComboBox<>();
+        comboMarcha = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         comboFrenoMano = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
@@ -131,13 +131,13 @@ public class frmVolante extends javax.swing.JFrame {
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/lblKilometraje.png"))); // NOI18N
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 200, 200));
 
-        lblSensores.setBackground(new java.awt.Color(0, 51, 102));
-        lblSensores.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblSensores.setForeground(new java.awt.Color(255, 255, 255));
-        lblSensores.setText("DIRECCION:");
-        lblSensores.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        lblSensores.setOpaque(true);
-        getContentPane().add(lblSensores, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 220, 100, 40));
+        lblMarcha.setBackground(new java.awt.Color(0, 51, 102));
+        lblMarcha.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblMarcha.setForeground(new java.awt.Color(255, 255, 255));
+        lblMarcha.setText("MARCHA");
+        lblMarcha.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        lblMarcha.setOpaque(true);
+        getContentPane().add(lblMarcha, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 220, 100, 40));
 
         rbtnApagadas.setBackground(new java.awt.Color(0, 51, 102));
         rbtnApagadas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -191,12 +191,12 @@ public class frmVolante extends javax.swing.JFrame {
         lblEnergia.setOpaque(true);
         getContentPane().add(lblEnergia, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 90, 50, 30));
 
-        comboDireccion.setBackground(new java.awt.Color(51, 51, 51));
-        comboDireccion.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        comboDireccion.setForeground(new java.awt.Color(255, 255, 255));
-        comboDireccion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NEUTRO", "ADELANTE", "REVERSA", " ", " " }));
-        comboDireccion.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 51, 102), new java.awt.Color(0, 0, 153), new java.awt.Color(0, 51, 102), new java.awt.Color(0, 51, 102)));
-        getContentPane().add(comboDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 220, 120, 40));
+        comboMarcha.setBackground(new java.awt.Color(51, 51, 51));
+        comboMarcha.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        comboMarcha.setForeground(new java.awt.Color(255, 255, 255));
+        comboMarcha.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NEUTRO", "ADELANTE", "REVERSA", " ", " " }));
+        comboMarcha.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 51, 102), new java.awt.Color(0, 0, 153), new java.awt.Color(0, 51, 102), new java.awt.Color(0, 51, 102)));
+        getContentPane().add(comboMarcha, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 220, 120, 40));
 
         jLabel5.setBackground(new java.awt.Color(0, 51, 102));
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -303,24 +303,42 @@ public class frmVolante extends javax.swing.JFrame {
 
     btnAcelerar.addMouseListener(new java.awt.event.MouseAdapter() {
     public void mousePressed(java.awt.event.MouseEvent evt) {
-        if (control.getEstadoEncendido() == EstadoEncendido.ENCENDIDO && control.getNivelEnergia() > 0) {
+        String direccion = (String) comboMarcha.getSelectedItem();
 
-            if (!control.todasLasPuertasCerradas()) {
-                JOptionPane.showMessageDialog(null, "No se puede acelerar: hay una puerta abierta.");
-                return;
-            }
-
-            if (!control.sePuedeAcelerar()) {
-                JOptionPane.showMessageDialog(null, "Debe abrochar los cinturones del piloto y pasajero para poder acelerar.");
-                return;
-            }
-
-            mensajeMostrado[0] = false;
-            timerAcelerar.start();
-
-        } else {
-            JOptionPane.showMessageDialog(null, "No se puede acelerar. El motor está apagado o sin energía.");
+        if ("Neutro".equalsIgnoreCase(direccion)) {
+            JOptionPane.showMessageDialog(null, "No se puede avanzar en neutro.");
+            return;
         }
+
+        if (control.getSensores().isFrenoManoActivo()) {
+            JOptionPane.showMessageDialog(null, "No se puede avanzar con el freno de mano activado.");
+            return;
+        }
+
+        if ("Reversa".equalsIgnoreCase(direccion)) {
+            if (control.getSensores().isObstaculoDetras()) {
+                JOptionPane.showMessageDialog(null, "Obstáculo detectado detrás. No se puede ir en reversa.");
+                return;
+            }
+        }
+
+        if (control.getEstadoEncendido() != EstadoEncendido.ENCENDIDO || control.getNivelEnergia() <= 0) {
+            JOptionPane.showMessageDialog(null, "No se puede acelerar. El motor está apagado o sin energía.");
+            return;
+        }
+
+        if (!control.todasLasPuertasCerradas()) {
+            JOptionPane.showMessageDialog(null, "No se puede acelerar: hay una puerta abierta.");
+            return;
+        }
+
+        if (!control.sePuedeAcelerar()) {
+            JOptionPane.showMessageDialog(null, "Debe abrochar los cinturones del piloto y pasajero para poder acelerar.");
+            return;
+        }
+
+        mensajeMostrado[0] = false;
+        timerAcelerar.start();
     }
 
     public void mouseReleased(java.awt.event.MouseEvent evt) {
@@ -472,8 +490,8 @@ private void actualizarEstadoMotor() {
     private javax.swing.JButton btnFrenar;
     private javax.swing.JCheckBox chkLucesEmergencia;
     private javax.swing.JCheckBox chkObstaculo;
-    private javax.swing.JComboBox<String> comboDireccion;
     private javax.swing.JComboBox<String> comboFrenoMano;
+    private javax.swing.JComboBox<String> comboMarcha;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -483,7 +501,7 @@ private void actualizarEstadoMotor() {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel lblEnergia;
     private javax.swing.JLabel lblKilometrajeTotal;
-    private javax.swing.JLabel lblSensores;
+    private javax.swing.JLabel lblMarcha;
     private javax.swing.JLabel lblVelocidad;
     private javax.swing.JRadioButton rbtnAltas;
     private javax.swing.JRadioButton rbtnApagadas;
