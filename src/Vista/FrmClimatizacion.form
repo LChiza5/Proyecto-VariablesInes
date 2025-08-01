@@ -107,9 +107,9 @@
                       </Group>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="BtnAC" alignment="3" min="-2" pref="104" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="BtnCalefaccion" alignment="0" min="-2" pref="104" max="-2" attributes="0"/>
+                      <Component id="BtnAC" min="-2" pref="104" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
               </Group>
