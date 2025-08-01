@@ -159,6 +159,11 @@ public class FrmClimatizacion extends javax.swing.JFrame {
                 BtnCalefaccionMouseExited(evt);
             }
         });
+        BtnCalefaccion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnCalefaccionActionPerformed(evt);
+            }
+        });
 
         BtnMas.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         BtnMas.setForeground(new java.awt.Color(0, 0, 0));
@@ -171,6 +176,11 @@ public class FrmClimatizacion extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 BtnMasMouseExited(evt);
+            }
+        });
+        BtnMas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnMasActionPerformed(evt);
             }
         });
 
@@ -307,6 +317,14 @@ public class FrmClimatizacion extends javax.swing.JFrame {
     private void BtnACActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnACActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BtnACActionPerformed
+
+    private void BtnCalefaccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCalefaccionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnCalefaccionActionPerformed
+
+    private void BtnMasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnMasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnMasActionPerformed
     private String formatoVelocidad(EstadoClimatizado vel){
         return switch (vel){
             case APAGADO -> "Apagado";

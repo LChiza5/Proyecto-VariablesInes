@@ -3,21 +3,41 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Vista;
+
 import Enums.VelocidadLimpiaParabrisas;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Timer;
+
+
+
 /**
  *
  * @author huete
  */
 public class FrmLimpiaParabrisas extends javax.swing.JFrame {
-    
+     private int angulo = 0; 
+     private Timer timer;
+     private VelocidadLimpiaParabrisas velocidad = VelocidadLimpiaParabrisas.OFF;
+     private boolean subiendo = true;
+     public void Escobilas(){
+          setBackground(Color.BLACK);
+       
+    }
+
+        
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmLimpiaParabrisas.class.getName());
 
     /**
      * Creates new form FrmLimpiaParabrisas
      */
     public FrmLimpiaParabrisas() {
+       
         initComponents();
+      
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -30,56 +50,28 @@ public class FrmLimpiaParabrisas extends javax.swing.JFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         EncendidoLimpiaParabrisas = new javax.swing.JToggleButton();
-        jPanel2 = new javax.swing.JPanel();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
+        BtnMenor = new javax.swing.JButton();
+        BtnMayor = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        VarVel = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        jLabel1.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/parabrisas (1).png"))); // NOI18N
-        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(61, 61, 61))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 309, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        jPanel1.setBackground(new java.awt.Color(0, 51, 51));
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         EncendidoLimpiaParabrisas.setBackground(new java.awt.Color(102, 102, 102));
         EncendidoLimpiaParabrisas.setForeground(new java.awt.Color(0, 0, 0));
         EncendidoLimpiaParabrisas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/apagar (1).png"))); // NOI18N
         EncendidoLimpiaParabrisas.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        EncendidoLimpiaParabrisas.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/encender (1).png"))); // NOI18N
         EncendidoLimpiaParabrisas.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/encender (1).png"))); // NOI18N
         EncendidoLimpiaParabrisas.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         EncendidoLimpiaParabrisas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 EncendidoLimpiaParabrisasMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                EncendidoLimpiaParabrisasMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                EncendidoLimpiaParabrisasMouseExited(evt);
             }
         });
         EncendidoLimpiaParabrisas.addActionListener(new java.awt.event.ActionListener() {
@@ -88,58 +80,108 @@ public class FrmLimpiaParabrisas extends javax.swing.JFrame {
             }
         });
 
-        jPanel2.setBackground(new java.awt.Color(0, 0, 102));
-        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jRadioButton2.setText("Media");
-
-        buttonGroup1.add(jRadioButton3);
-        jRadioButton3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jRadioButton3.setText("Rapida");
-
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jRadioButton1.setText("Lenta");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        BtnMenor.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        BtnMenor.setForeground(new java.awt.Color(255, 255, 255));
+        BtnMenor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MenosParabrisas.png"))); // NOI18N
+        BtnMenor.setContentAreaFilled(false);
+        BtnMenor.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        BtnMenor.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/signo-menos (1).png"))); // NOI18N
+        BtnMenor.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/signo-menos (1).png"))); // NOI18N
+        BtnMenor.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        BtnMenor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                BtnMenorMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                BtnMenorMouseExited(evt);
+            }
+        });
+        BtnMenor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                BtnMenorActionPerformed(evt);
             }
         });
 
+        BtnMayor.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        BtnMayor.setForeground(new java.awt.Color(255, 255, 255));
+        BtnMayor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/masParabrisas.png"))); // NOI18N
+        BtnMayor.setContentAreaFilled(false);
+        BtnMayor.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        BtnMayor.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/mas (2).png"))); // NOI18N
+        BtnMayor.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/mas (2).png"))); // NOI18N
+        BtnMayor.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        BtnMayor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                BtnMayorMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                BtnMayorMouseExited(evt);
+            }
+        });
+
+        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Velocidades");
+
+        VarVel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        VarVel.setForeground(new java.awt.Color(255, 255, 255));
+        VarVel.setText("null");
+
+        jPanel2.setBackground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jRadioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jRadioButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel2)))
-                .addContainerGap(33, Short.MAX_VALUE))
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(7, 7, 7)
-                .addComponent(jLabel2)
+            .addGap(0, 231, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(EncendidoLimpiaParabrisas, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
+                .addComponent(BtnMenor, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButton3)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addComponent(BtnMayor, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(VarVel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(52, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(EncendidoLimpiaParabrisas)
+                        .addGap(22, 22, 22))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(BtnMayor, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BtnMenor, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(VarVel)
+                        .addGap(44, 44, 44))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -147,51 +189,52 @@ public class FrmLimpiaParabrisas extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(EncendidoLimpiaParabrisas, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(99, 99, 99))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(EncendidoLimpiaParabrisas))
-                .addGap(142, 142, 142))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
-
     private void EncendidoLimpiaParabrisasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EncendidoLimpiaParabrisasActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_EncendidoLimpiaParabrisasActionPerformed
-
-    private void EncendidoLimpiaParabrisasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EncendidoLimpiaParabrisasMouseEntered
-        EncendidoLimpiaParabrisas.setText("Apagar");
-    }//GEN-LAST:event_EncendidoLimpiaParabrisasMouseEntered
-
-    private void EncendidoLimpiaParabrisasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EncendidoLimpiaParabrisasMouseExited
-        EncendidoLimpiaParabrisas.setText("Encender");
-    }//GEN-LAST:event_EncendidoLimpiaParabrisasMouseExited
 
     private void EncendidoLimpiaParabrisasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EncendidoLimpiaParabrisasMouseClicked
         EncendidoLimpiaParabrisas.setText("");
         
     }//GEN-LAST:event_EncendidoLimpiaParabrisasMouseClicked
 
+    private void BtnMenorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnMenorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnMenorActionPerformed
+
+    private void BtnMayorMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnMayorMouseEntered
+        BtnMayor.setText("Subir");
+    }//GEN-LAST:event_BtnMayorMouseEntered
+
+    private void BtnMayorMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnMayorMouseExited
+          BtnMayor.setText("");
+    }//GEN-LAST:event_BtnMayorMouseExited
+
+    private void BtnMenorMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnMenorMouseEntered
+         BtnMenor.setText("Bajar");
+    }//GEN-LAST:event_BtnMenorMouseEntered
+
+    private void BtnMenorMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnMenorMouseExited
+          BtnMenor.setText("");
+    }//GEN-LAST:event_BtnMenorMouseExited
+    private void Escobillas(){
+        
+        
+    }
     /**
      * @param args the command line arguments
      */
@@ -218,14 +261,13 @@ public class FrmLimpiaParabrisas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnMayor;
+    private javax.swing.JButton BtnMenor;
     private javax.swing.JToggleButton EncendidoLimpiaParabrisas;
+    private javax.swing.JLabel VarVel;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
     // End of variables declaration//GEN-END:variables
 }
