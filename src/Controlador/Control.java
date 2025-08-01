@@ -160,6 +160,9 @@ public class Control{
     public boolean cambiarVelocidadLimpiaParabrisas(VelocidadLimpiaParabrisas velocidad) {
         return limpiaParabrisas.cambiarVelocidad(velocidad);
     }
+    public VelocidadLimpiaParabrisas getVelocidadLimpiaParabrisas() {
+    return limpiaParabrisas.getVelocidad();
+}
 
     // Métodos para radio
     public void encenderRadio() {

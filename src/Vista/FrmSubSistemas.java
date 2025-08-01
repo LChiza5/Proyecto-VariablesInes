@@ -128,6 +128,11 @@ public class FrmSubSistemas extends javax.swing.JFrame {
         btnParabrisas.setForeground(new java.awt.Color(255, 255, 255));
         btnParabrisas.setText("Parabrisas");
         btnParabrisas.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
+        btnParabrisas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnParabrisasActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnParabrisas, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 320, 180, 70));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/fondoAzul.png"))); // NOI18N
@@ -164,6 +169,11 @@ public class FrmSubSistemas extends javax.swing.JFrame {
         FrmClimatizacion frame = new FrmClimatizacion(control);
         frame.setVisible(true);
     }//GEN-LAST:event_btnClimatizacionActionPerformed
+
+    private void btnParabrisasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnParabrisasActionPerformed
+        FrmLimpiaParabrisas frame = new FrmLimpiaParabrisas(control);
+        frame.setVisible(true);
+    }//GEN-LAST:event_btnParabrisasActionPerformed
 
     /**
      * @param args the command line arguments
