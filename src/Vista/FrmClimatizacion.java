@@ -27,17 +27,35 @@ public class FrmClimatizacion extends javax.swing.JFrame {
         initComponents();
         control = new Control(4,5);
         BtnAC.addActionListener(new java.awt.event.ActionListener() {
+            private boolean ACEncendida = false;
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-              control.activarAC(true);
-              JOptionPane.showMessageDialog(null, "Aire acondicionado activado");
+               if (!ACEncendida) {
+            control.activarCalefaccion(true);
+            control.activarAC(false); // Apaga el aire acondicionado
+            JOptionPane.showMessageDialog(null, "Calefacción activada");
+            ACEncendida = true;
+        } else {
+            control.activarCalefaccion(true);
+            JOptionPane.showMessageDialog(null, "Calefacción apagada");
+            ACEncendida = false;
+        }
             }
         });
          BtnCalefaccion.addActionListener(new java.awt.event.ActionListener() {
+             private boolean calefaccionEncendida = false;
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                control.activarCalefaccion(true);
-                JOptionPane.showMessageDialog(null, "Calefacción activada");
+              if (!calefaccionEncendida) {
+            control.activarCalefaccion(true);
+            control.activarAC(false); // Apaga el aire acondicionado
+            JOptionPane.showMessageDialog(null, "Calefacción activada");
+            calefaccionEncendida = true;
+        } else {
+            control.activarCalefaccion(true);
+            JOptionPane.showMessageDialog(null, "Calefacción apagada");
+            calefaccionEncendida = false;
+        }
             }
          });
          BtnMas.addActionListener(new java.awt.event.ActionListener() {
@@ -64,15 +82,18 @@ public class FrmClimatizacion extends javax.swing.JFrame {
             }
          });
         Encender.addActionListener(new java.awt.event.ActionListener() {
+            private boolean aireEncendido = false;
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-             if (control.getEstadoEncendido() == EstadoEncendido.APAGADO){
-                 control.encenderMotor();
-                 JOptionPane.showMessageDialog(null , "Climatización encendida");
-             }else {
-                 control.apagarMotor();
-                 JOptionPane.showMessageDialog(null , "Climatización apagada");
-             }
+               if (!aireEncendido) {
+            control.activarAC(true);
+            aireEncendido = true;
+            JOptionPane.showMessageDialog(null, "Aire  encendido");
+        } else {
+            control.activarAC(false);
+            aireEncendido = false;
+            JOptionPane.showMessageDialog(null, "Aire  apagado");
+        }
             }
         });
     }
